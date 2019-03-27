@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<nav id="TOC">
+<ul>
+<li><a href="#sdsc-2018-webinar-series-topic-introduction-to-running-jobs-on-comet"><span class="toc-section-number">1</span> SDSC 2018 Webinar Series Topic: Introduction to Running Jobs on Comet</a><ul>
+<li><a href="#comet-overview"><span class="toc-section-number">1.1</span> <a name="overview"></a>Comet Overview:</a><ul>
+<li><a href="#hpc-for-the-long-tail-of-science"><span class="toc-section-number">1.1.1</span> HPC for the “long tail of science:”</a></li>
+</ul></li>
+<li><a href="#getting-started-on-comet"><span class="toc-section-number">1.2</span> <a name="sys-env"></a>Getting Started on Comet</a><ul>
+<li><a href="#comet-accounts"><span class="toc-section-number">1.2.1</span> <a name="comet-accounts"></a>Comet Accounts</a></li>
+<li><a href="#logging-onto-comet"><span class="toc-section-number">1.2.2</span> <a name="comet-logon"></a>Logging Onto Comet</a></li>
+<li><a href="#modules-customizing-your-user-environment"><span class="toc-section-number">1.2.3</span> <a name="modules"></a>Modules: Customizing Your User Environment</a></li>
+<li><a href="#install-tutorial-examples"><span class="toc-section-number">1.2.4</span> <a name="install-examples"></a>Install Tutorial Examples</a></li>
+</ul></li>
+<li><a href="#compiling-jobs"><span class="toc-section-number">1.3</span> <a name="compilers"></a>Compiling Jobs</a><ul>
+<li><a href="#supported-compiler-types"><span class="toc-section-number">1.3.1</span> <a name="compilers-supported"></a>Supported Compiler Types</a></li>
+<li><a href="#using-the-intel-compilers-defaultsuggested"><span class="toc-section-number">1.3.2</span> <a name="compilers-intel"></a>Using the Intel Compilers (Default/Suggested):</a></li>
+<li><a href="#using-the-pgi-compilers"><span class="toc-section-number">1.3.3</span> <a name="compilers-pgi"></a>Using the PGI Compilers</a></li>
+<li><a href="#using-the-gnu-compilers"><span class="toc-section-number">1.3.4</span> <a name="compilers-gnu"></a>Using the GNU Compilers</a></li>
+</ul></li>
+<li><a href="#running-jobs-on-comet"><span class="toc-section-number">1.4</span> <a name="runningjobs"></a>Running Jobs on Comet</a><ul>
+<li><a href="#command-line-jobs"><span class="toc-section-number">1.4.1</span> <a name="running-jobs-cmdline"></a>Command Line Jobs</a></li>
+<li><a href="#running-jobs-using-slurm"><span class="toc-section-number">1.4.2</span> <a name="running-jobs-slurm"></a>Running Jobs using SLURM</a></li>
+<li><a href="#batch-jobs-using-slurm"><span class="toc-section-number">1.4.3</span> <a name="slurm-batch-jobs"></a>Batch Jobs using SLURM:</a></li>
+<li><a href="#slurm-partitions"><span class="toc-section-number">1.4.4</span> Slurm Partitions</a></li>
+<li><a href="#slurm-commands"><span class="toc-section-number">1.4.5</span> <a name="slurm-commands"></a>Slurm Commands</a></li>
+<li><a href="#hello-world-openmp"><span class="toc-section-number">1.4.6</span> <a name="helloworld-omp"></a>Hello World (OpenMP)</a></li>
+<li><a href="#hybrid-mpi-openmp-jobs"><span class="toc-section-number">1.4.7</span> <a name="hybrid-mpi-omp"></a>Hybrid (MPI + OpenMP) Jobs</a></li>
+<li><a href="#compiling-cuda-example-gpu"><span class="toc-section-number">1.4.8</span> <a name="mat-mul-gpu"></a>Compiling CUDA Example (GPU)</a></li>
+<li><a href="#compiling-cuda-example-gpu-1"><span class="toc-section-number">1.4.9</span> <a name="mat-mul-gpu-compile"></a>Compiling CUDA Example (GPU)</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="sdsc-2018-webinar-series-topic-introduction-to-running-jobs-on-comet"><span class="header-section-number">1</span> SDSC 2018 Webinar Series Topic: Introduction to Running Jobs on Comet</h1>
+Presented by Mary Thomas (SDSC, <a href="mailto:mpthomas@ucsd.edu">mpthomas@ucsd.edu</a> )
+<hr>
+<p>In this tutorial, you will learn how to compile and run jobs on Comet, where to run them, and how to run batch jobs. The commands below can be cut &amp; pasted into the comet terminal window.</p>
+<p>Requirements: * You must have a comet account in order to access the system. * To obtain a trial account: http://www.sdsc.edu/support/user_guides/comet.html#trial_accounts * You must be familiar with running basic Unix commands: see the following tutorials at: * https://github.com/marypthomas/sdsc-training/tree/master/introduction-to-running-jobs-on-comet/preparation * Note: The <code>hostname</code> for Comet is <code>comet.sdsc.edu</code></p>
+<em>If you have any difficulties completing these tasks, please contact SDSC Consulting group at <a href="mailto:consult@sdsc.edu">consult@sdsc.edu</a>.</em>
+<hr>
+<p><a name="top">Contents: * <a href="#overview">Comet Overview</a> * <a href="#network-arch">Comet Architecture</a> * <a href="#file-systems">Comet File Systems</a></p>
+<ul>
+<li><a href="#sys-env">Getting Started - Comet System Environment</a>
+<ul>
+<li><a href="#comet-accounts">Comet Accounts</a></li>
+<li><a href="#comet-logon">Logging Onto Comet</a></li>
+<li><a href="#modules">Modules: Managing User Environments</a></li>
+<li><a href="#install-examples">Install Examples</a></li>
+</ul></li>
+<li><a href="#compilers">Compiling Jobs</a>
+<ul>
+<li><a href="#compilers-supported">Supported Compiler Types</a></li>
+<li><a href="#compilers-intel">Intel Compiling</a></li>
+<li><a href="#compilers-pgi">PGI Compiling</a></li>
+<li><a href="#compilers-gnu">GNU Compiling</a></li>
+</ul></li>
+<li><a href="#running-jobs">Running Jobs on Comet</a>
+<ul>
+<li><a href="#running-jobs-cmdline">Command Line Jobs</a></li>
+<li><a href="#running-jobs-slurm">Batch Jobs using SLURM</a></li>
+<li><a href="#running-jobs-slurm-commands">Slurm Commands</a></li>
+</ul></li>
+<li><p><a href="#putting-it-all-together">Putting it All Together</a></p>
+<ul>
+<li><a href="#hello-world-mpi">Hello World (MPI)</a>
+<ul>
+<li><a href="#helloworld-mpi-compile">Hello World (MPI): Compiling</a></li>
+<li><a href="#helloworld-mpi-batch-submit">Hello World (MPI): Batch Script Submission</a></li>
+<li><a href="#helloworld-mpi-batch-output">Hello World (MPI): Batch Script Output</a></li>
+</ul></li>
+<li><a href="#helloworld-omp">Hello World (OpenMP)</a>
+<ul>
+<li><a href="#helloworld-omp-compile">Hello World (OpenMP): Compiling</a></li>
+<li><a href="#helloworld-omp-interactive">Hello World (OpenMP): Interactive jobs</a></li>
+<li><a href="#helloworld-omp-batch-submit">Hello World (OpenMP): Batch Script Submission</a></li>
+<li><a href="#helloworld-omp-batch-output">Hello World (OpenMP): Batch Script Output</a></li>
+</ul></li>
+<li><a href="#hybrid-mpi-omp">Running Hybrid (MPI + OpenMP) Jobs</a>
+<ul>
+<li><a href="#hybrid-mpi-omp-compile">Hybrid (MPI + OpenMP): Compiling</a></li>
+<li><a href="#hybrid-mpi-omp-batch-submit">Hybrid (MPI + OpenMP): Batch Script Submission</a></li>
+<li><a href="#hybrid-mpi-omp-output">Hybrid (MPI + OpenMP): Batch Script Output</a></li>
+</ul></li>
+<li><a href="#mat-mul-gpu">Compiling CUDA Example (GPU)</a>
+<ul>
+<li><a href="#mat-mul-gpu-compile">Matrix Mult. (GPU): Compiling</a></li>
+<li><a href="#mat-mul-gpu-batch-submit">Matrix Mult. (GPU): Batch Script submission</a></li>
+<li><a href="#mat-mul-gpu-batch-output">Matrix Mult. (GPU): Batch Job Output</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<a href="#top">Back to Top</a>
+<hr>
+<h2 id="comet-overview"><span class="header-section-number">1.1</span> <a name="overview"></a>Comet Overview:</h2>
+<h3 id="hpc-for-the-long-tail-of-science"><span class="header-section-number">1.1.1</span> HPC for the “long tail of science:”</h3>
+<ul>
+<li>Designed and operated on the principle that the majority of computational research is performed at modest scale: large number jobs that run for less than 48 hours, but can be computationally intensvie and generate large amounts of data.</li>
+<li>An NSF-funded system available through the eXtreme Science and Engineering Discovery Environment (XSEDE) program.</li>
+<li>Also supports science gateways.</li>
+</ul>
+<p><img src="images/comet-rack.png" alt="Comet Rack View" width="500px" /> * ~67 TF supercomputer in a rack * 27 single-rack supercomputers</p>
+<p><img src="images/comet-characteristics.png" alt="Comet System Characteristics" width="500px" /></p>
+<a href="#top">Back to Top</a>
+<hr>
+<p><a name="network-arch"></a><img src="images/comet-network-arch.png" alt="Comet Network Architecture" width="500px" /></p>
+<a href="#top">Back to Top</a>
+<hr>
+<p><a name="file-systems"></a><img src="images/comet-file-systems.png" alt="Comet File Systems" width="500px" /> * Lustre filesystems – Good for scalable large block I/O * Accessible from all compute and GPU nodes. * /oasis/scratch/comet - 2.5PB, peak performance: 100GB/s. Good location for storing large scale scratch data during a job. * /oasis/projects/nsf - 2.5PB, peak performance: 100 GB/s. Long term storage. * <em>Not good for lots of small files or small block I/O.</em></p>
+<ul>
+<li>SSD filesystems
+<ul>
+<li>/scratch local to each native compute node – 210GB on regular compute nodes, 285GB on GPU, large memory nodes, 1.4TB on selected compute nodes.</li>
+<li>SSD location is good for writing small files and temporary scratch files. Purged at the end of a job.</li>
+</ul></li>
+<li>Home directories (/home/$USER)
+<ul>
+<li>Source trees, binaries, and small input files.</li>
+<li><em>Not good for large scale I/O.</em></li>
+</ul></li>
+</ul>
+<a href="#top">Back to Top</a>
+<hr>
+<h2 id="getting-started-on-comet"><span class="header-section-number">1.2</span> <a name="sys-env"></a>Getting Started on Comet</h2>
+<h3 id="comet-accounts"><span class="header-section-number">1.2.1</span> <a name="comet-accounts"></a>Comet Accounts</h3>
+<p>You must have a comet account in order to access the system. * Obtain a trial account here: http://www.sdsc.edu/support/user_guides/comet.html#trial_accounts * You can use your XSEDE account.</p>
+<h3 id="logging-onto-comet"><span class="header-section-number">1.2.2</span> <a name="comet-logon"></a>Logging Onto Comet</h3>
+<p>Details about how to access Comet under different circumstances are described in the Comet User Guide: http://www.sdsc.edu/support/user_guides/comet.html#access</p>
+<p></a><img src="images/comet-logon.png" alt="Comet Logon" width="500px" /></p>
+<pre><code>[username@gidget:~]
+[username@gidget:~] ssh -Y comet.sdsc.edu
+Warning: No xauth data; using fake authentication data for X11 forwarding.
+Last login: Tue Jul 17 12:08:53 2018 from wireless-169-228-90-10.ucsd.edu
+Rocks 6.2 (SideWinder)
+Profile built 16:45 08-Feb-2016
+
+Kickstarted 17:27 08-Feb-2016
+
+                      WELCOME TO
+      __________________  __  _______________
+        -----/ ____/ __ \/  |/  / ____/_  __/
+          --/ /   / / / / /|_/ / __/   / /
+           / /___/ /_/ / /  / / /___  / /
+           \____/\____/_/  /_/_____/ /_/
+
+*******************************************************************************
+
+[1] Example Scripts: /share/apps/examples
+
+[2] Filesystems:
+
+     (a) Lustre scratch filesystem : /oasis/scratch/comet/$USER/temp_project
+         (Preferred: Scalable large block I/O)
+
+     (b) Compute/GPU node local SSD storage: /scratch/$USER/$SLURM_JOBID
+         (Meta-data intensive jobs, high IOPs)
+
+     (c) Lustre projects filesystem: /oasis/projects/nsf
+
+     (d) /home/$USER : Only for source files, libraries, binaries.
+         *Do not* use for I/O intensive jobs.
+
+[3] Comet User Guide: http://www.sdsc.edu/support/user_guides/comet.html
+******************************************************************************
+[username@comet-ln3 ~]$</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+<h3 id="modules-customizing-your-user-environment"><span class="header-section-number">1.2.3</span> <a name="modules"></a>Modules: Customizing Your User Environment</h3>
+<p>The Environment Modules package provides for dynamic modification of your shell environment. Module commands set, change, or delete environment variables, typically in support of a particular application. They also let the user choose between different versions of the same software or different combinations of related codes. See: http://www.sdsc.edu/support/user_guides/comet.html#modules</p>
+<p><b> Common module commands:</b></p>
+<p>Here are some common module commands and their descriptions:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>module list</td>
+<td>List the modules that are currently loaded</td>
+</tr>
+<tr class="even">
+<td>module avail</td>
+<td>List the modules that are available</td>
+</tr>
+<tr class="odd">
+<td>module display <module_name></td>
+<td>Show the environment variables used by <module name> and how they are affected</td>
+</tr>
+<tr class="even">
+<td>module show <module_name></td>
+<td>Same as display</td>
+</tr>
+<tr class="odd">
+<td>module unload <module name></td>
+<td>Remove <module name> from the environment</td>
+</tr>
+<tr class="even">
+<td>module load <module name></td>
+<td>Load <module name> into the environment</td>
+</tr>
+<tr class="odd">
+<td>module swap <module one> <module two></td>
+<td>Replace <module one> with <module two> in the environment</td>
+</tr>
+</tbody>
+</table>
+<p><b> A few module commands:</b></p>
+<ul>
+<li>Default environment: <code>list</code>, <code>li</code></li>
+</ul>
+<pre><code>$ module li
+Currently Loaded Module files:
+  1) intel/2013_sp1.2.144   2) mvapich2_ib/2.1        3) gnutools/2.69</code></pre>
+<ul>
+<li>List available modules: <code>available</code>, <code>avail</code>, <code>av</code></li>
+</ul>
+<pre><code>$ module av
+------------------------- /opt/modulefiles/mpi/.intel --------------------------
+intelmpi/2016.3.210(default) mvapich2_ib/2.1(default)
+mvapich2_gdr/2.1(default)    openmpi_ib/1.8.4(default)
+mvapich2_gdr/2.2
+--------------------- /opt/modulefiles/applications/.intel ---------------------
+atlas/3.10.2(default)     lapack/3.6.0(default)     scalapack/2.0.2(default)
+boost/1.55.0(default)     mxml/2.9(default)         slepc/3.6.2(default)
+. . .</code></pre>
+<ul>
+<li>Load modules:</li>
+</ul>
+<pre><code>$ module load fftw/3.3.4 
+$ module li
+Currently Loaded Modulefiles:
+  1) intel/2013_sp1.2.144   3) gnutools/2.69
+  2) mvapich2_ib/2.1        4) fftw/3.3.4</code></pre>
+<ul>
+<li>Show what a module does:</li>
+</ul>
+<pre><code>$ module show fftw/3.3.4
+-------------------------------------------------------------------
+/opt/modulefiles/applications/.intel/fftw/3.3.4:
+module-whatis fftw 
+module-whatis Version: 3.3.4 
+module-whatis Description: fftw 
+module-whatis Compiler: intel 
+module-whatis MPI Flavors: mvapich2_ib openmpi_ib 
+setenv FFTWHOME /opt/fftw/3.3.4/intel/mvapich2_ib 
+prepend-path PATH /opt/fftw/3.3.4/intel/mvapich2_ib/bin 
+prepend-path LD_LIBRARY_PATH /opt/fftw/3.3.4/intel/mvapich2_ib/lib 
+prepend-path LIBPATH /opt/fftw/3.3.4/intel/mvapich2_ib/lib 
+-------------------------------------------------------------------</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+<p>Once you have loaded the modules, you can check the system variables that are available for you to use. * To see all variable, run the <b><code>env</code></b> command. Typically, you will see more than 60 lines containing information such as your login name, shell, your home directory:</p>
+<pre><code>[username@comet-ln3 IBRUN]$ env
+HOSTNAME=comet-ln3.sdsc.edu
+INTEL_LICENSE_FILE=/opt/intel/composer_xe_2013_sp1.2.144/licenses:/opt/intel/licenses:/root/intel/licenses
+TERM=xterm-256color
+SHELL=/bin/bash
+GDBSERVER_MIC=/opt/intel/composer_xe_2013_sp1.2.144/debugger/gdb/target/mic/bin/gdbserver
+LOADEDMODULES=intel/2013_sp1.2.144:mvapich2_ib/2.1:gnutools/2.69
+HOME=/home/username
+MPIHOME=/opt/mvapich2/intel/ib
+SDSCHOME=/opt/sdsc
+PYTHONPATH=/opt/sdsc/lib:/opt/sdsc/lib/python2.6/site-packages
+LOGNAME=username
+SSH_CONNECTION=76.176.117.51 58589 198.202.113.252 22
+MODULESHOME=/usr/share/Modules
+INCLUDE=/opt/intel/composer_xe_2013_sp1.2.144/mkl/include
+INTELHOME=/opt/intel/composer_xe_2013_sp1.2.144</code></pre>
+<p>To see the value for any of these variables, use the <code>echo</code> command:</p>
+<pre><code>[username@comet-ln3 IBRUN]$ echo $PATH
+PATH=/opt/gnu/gcc/bin:/opt/gnu/bin:/opt/mvapich2/intel/ib/bin:/opt/intel/composer_xe_2013_sp1.2.144/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/mpirt/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/debugger/gdb/intel64_mic/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/ibutils/bin:/usr/java/latest/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/home/username/bin</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+<h3 id="install-tutorial-examples"><span class="header-section-number">1.2.4</span> <a name="install-examples"></a>Install Tutorial Examples</h3>
+<ul>
+<li>Create a test directory hold the comet example files:</li>
+</ul>
+<pre><code>[mthomas@comet-ln2 ~]$ mkdir comet-examples
+[mthomas@comet-ln2 ~]$ ls -al
+total 166
+drwxr-x---   8 mthomas use300    24 Jul 17 20:20 .
+drwxr-xr-x 139 root    root       0 Jul 17 20:17 ..
+-rw-r--r--   1 mthomas use300  2487 Jun 23  2017 .alias
+-rw-------   1 mthomas use300 14247 Jul 17 12:11 .bash_history
+-rw-r--r--   1 mthomas use300    18 Jun 19  2017 .bash_logout
+-rw-r--r--   1 mthomas use300   176 Jun 19  2017 .bash_profile
+-rw-r--r--   1 mthomas use300   159 Jul 17 18:24 .bashrc
+drwxr-xr-x   2 mthomas use300     2 Jul 17 20:20 comet-examples
+[snip extra lines]
+[mthomas@comet-ln2 ~]$ cd comet-examples/
+[mthomas@comet-ln2 comet-examples]$ pwd
+/home/mthomas/comet-examples
+[mthomas@comet-ln2 comet-examples]$</code></pre>
+<ul>
+<li>Copy the <code>PHYS244 directory</code> from the /examples directory to your ‘comet-examples’ directory, which is located in your home (<code>/home/username</code>) directory. Note: you should have completed the creation of this directory as part of the <em>Getting Started</em> and <em>Basic Skills</em> preparation work: https://github.com/sdsc/sdsc-summer-institute-2018/tree/master/0_preparation</li>
+</ul>
+<pre><code>[username@comet-ln3 ~]$ ls -al /share/apps/examples/PHYS244/
+total 64
+drwxr-xr-x 16 mahidhar use300 4096 Apr 24 21:57 .
+drwxrwxr-x 58 mahidhar use300 4096 Jul 29 11:36 ..
+drwxr-xr-x  2 mahidhar use300 4096 Apr 16 22:46 COMPILER_EXAMPLES
+drwxr-xr-x  2 mahidhar use300 4096 Apr 16 21:52 CUDA
+drwxr-xr-x  2 mahidhar use300 4096 May 31 13:24 debug
+drwxr-xr-x  3 mahidhar use300 4096 Apr 19 13:15 HADOOP
+drwxr-xr-x  2 mahidhar use300 4096 Apr 16 21:52 HYBRID
+drwxr-xr-x  2 mahidhar use300 4096 Apr 16 21:52 LOCALSCRATCH
+drwxr-xr-x  2 mahidhar use300 4096 Apr 24 21:57 LOCALSCRATCH2
+drwxr-xr-x  2 mahidhar use300 4096 Apr 16 23:30 MKL
+drwxr-xr-x  4 mahidhar use300 4096 Apr 16 21:52 MPI
+drwxr-xr-x  2 mahidhar use300 4096 Apr 16 21:52 OpenACC
+drwxr-xr-x  2 mahidhar use300 4096 Apr 16 21:52 OPENMP
+drwxr-xr-x  3 mahidhar use300 4096 Apr 19 13:11 pytorch
+drwxr-xr-x  4 mahidhar use300 4096 Apr 19 13:11 SPARK
+drwxr-xr-x  4 mahidhar use300 4096 Apr 19 13:14 TensorFlow</code></pre>
+<p>Copy the ‘PHYS244’ directory into your <code>comet-examples</code> directory:</p>
+<pre><code>[username@comet-ln3 ~]$
+[username@comet-ln3 ~]$ cp -r /share/apps/examples/PHYS244/ comet-examples/
+[username@comet-ln3 ~]$ ls -al comet-examples/
+total 105
+drwxr-xr-x  5 username use300   6 Aug  5 19:02 .
+drwxr-x--- 10 username use300  27 Aug  5 17:59 ..
+drwxr-xr-x 16 username use300  16 Aug  5 19:02 PHYS244
+[username@comet-ln3 ~]$ cd comet-examples/PHYS244/
+[username@comet-ln3 PHYS244]$ ls -al
+total 212
+drwxr-xr-x 16 username use300 16 Aug  5 19:02 .
+drwxr-xr-x  5 username use300  6 Aug  5 19:02 ..
+drwxr-xr-x  2 username use300  5 Aug  5 19:02 COMPILER_EXAMPLES
+drwxr-xr-x  2 username use300 11 Aug  5 19:02 CUDA
+drwxr-xr-x  2 username use300 11 Aug  5 19:02 debug
+drwxr-xr-x  3 username use300  3 Aug  5 19:02 HADOOP
+drwxr-xr-x  2 username use300  5 Aug  5 19:02 HYBRID
+drwxr-xr-x  2 username use300  6 Aug  5 19:02 LOCALSCRATCH
+drwxr-xr-x  2 username use300  5 Aug  5 19:02 LOCALSCRATCH2
+drwxr-xr-x  2 username use300  8 Aug  5 19:02 MKL
+drwxr-xr-x  4 username use300  6 Aug  5 19:02 MPI
+drwxr-xr-x  2 username use300  8 Aug  5 19:02 OpenACC
+drwxr-xr-x  2 username use300  6 Aug  5 19:02 OPENMP
+drwxr-xr-x  3 username use300  5 Aug  5 19:02 pytorch
+drwxr-xr-x  4 username use300  4 Aug  5 19:02 SPARK
+drwxr-xr-x  4 username use300  5 Aug  5 19:02 TensorFlow</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+<h2 id="compiling-jobs"><span class="header-section-number">1.3</span> <a name="compilers"></a>Compiling Jobs</h2>
+<p>Comet provides the Intel, Portland Group (PGI), and GNU compilers along with multiple MPI implementations (MVAPICH2, MPICH2, OpenMPI). Most applications will achieve the best performance on Comet using the Intel compilers and MVAPICH2 and the majority of libraries installed on Comet have been built using this combination.</p>
+<p>Other compilers and versions can be installed by Comet staff on request. For more information, see the user guide: http://www.sdsc.edu/support/user_guides/comet.html#compiling</p>
+<h3 id="supported-compiler-types"><span class="header-section-number">1.3.1</span> <a name="compilers-supported"></a>Supported Compiler Types</h3>
+<pre><code>* Comet compute nodes support several parallel programming models.
+* &lt;b&gt;MPI&lt;/b&gt;: Default: Intel
+    * Default Intel Compiler: intel/2013_sp1.2.144; Versions 2015.2.164 and 2016.3.210 available.
+    * Other options: openmpi_ib/1.8.4 (and 1.10.2), Intel MPI, mvapich2_ib/2.1
+    * mvapich2_gdr: GPU direct enabled version
+* &lt;b&gt;OpenMP&lt;/b&gt;:
+    * All compilers (GNU, Intel, PGI) have OpenMP flags.
+* GPU nodes support CUDA, OpenACC.
+* Hybrid modes are possible.</code></pre>
+<p>In this tutorial, we inlcude several hands-on examples that cover many of the cases in the table:</p>
+<pre><code>(1) MPI
+(2) OpenMP
+(3) HYBRID
+(4) Local scratch</code></pre>
+<h3 id="using-the-intel-compilers-defaultsuggested"><span class="header-section-number">1.3.2</span> <a name="compilers-intel"></a>Using the Intel Compilers (Default/Suggested):</h3>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Serial</th>
+<th>MPI</th>
+<th>OpenMP</th>
+<th>MPI+OpenMP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fortran</td>
+<td>ifort</td>
+<td>mpif90</td>
+<td>ifort -openmp</td>
+<td>mpif90 -openmp</td>
+</tr>
+<tr class="even">
+<td>C</td>
+<td>icc</td>
+<td>mpicc</td>
+<td>icc -openmp</td>
+<td>mpicc -openmp</td>
+</tr>
+<tr class="odd">
+<td>C++</td>
+<td>icpc</td>
+<td>mpicxx</td>
+<td>icpc -openmp</td>
+<td>mpicxx -openmp</td>
+</tr>
+</tbody>
+</table>
+<p>The Intel compilers and the MVAPICH2 MPI implementation will be loaded by default. If you have modified your environment, you can reload by executing the following commands at the Linux prompt or placing in your startup file (~/.cshrc or ~/.bashrc)</p>
+<pre><code>module purge
+module load gnutools
+module load intel mvapich2_ib</code></pre>
+<p>For AVX2 support, compile with the -xHOST option. Note that -xHOST alone does not enable aggressive optimization, so compilation with -O3 is also suggested. The -fast flag invokes -xHOST, but should be avoided since it also turns on interprocedural optimization (-ipo), which may cause problems in some instances.</p>
+<p>Intel MKL libraries are available as part of the “intel” modules on Comet. Once this module is loaded, the environment variable MKL_ROOT points to the location of the mkl libraries. The MKL link advisor can be used to ascertain the link line (change the MKL_ROOT aspect appropriately).</p>
+<p>For example to compile a C program statically linking 64 bit scalapack libraries on Comet:</p>
+<pre><code>mpicc -o pdpttr.exe pdpttr.c \
+    -I$MKL_ROOT/include ${MKL_ROOT}/lib/intel64/libmkl_scalapack_lp64.a \
+    -Wl,--start-group ${MKL_ROOT}/lib/intel64/libmkl_intel_lp64.a \
+    ${MKL_ROOT}/lib/intel64/libmkl_core.a ${MKL_ROOT}/lib/intel64/libmkl_sequential.a \
+    -Wl,--end-group ${MKL_ROOT}/lib/intel64/libmkl_blacs_intelmpi_lp64.a -lpthread -lm</code></pre>
+<p>For more information on the Intel compilers: [ifort | icc | icpc] -help</p>
+<a href="#top">Back to Top</a>
+<hr>
+<h3 id="using-the-pgi-compilers"><span class="header-section-number">1.3.3</span> <a name="compilers-pgi"></a>Using the PGI Compilers</h3>
+<p>The PGI compilers can be loaded by executing the following commands at the Linux prompt or placing in your startup file (~/.cshrc or ~/.bashrc)</p>
+<p>module purge module load gnutools module load pgi mvapich2_ib For AVX support, compile with -fast</p>
+<p>For more information on the PGI compilers: man [pgf90 | pgcc | pgCC]</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Serial</th>
+<th>MPI</th>
+<th>OpenMP</th>
+<th>MPI+OpenMP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>pgf90</td>
+<td>mpif90</td>
+<td>pgf90 -mp</td>
+<td>mpif90 -mp</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>C</td>
+<td>pgcc</td>
+<td>mpicc</td>
+<td>pgcc -mp</td>
+<td>mpicc -mp</td>
+</tr>
+<tr class="odd">
+<td>C++</td>
+<td>pgCC</td>
+<td>mpicxx</td>
+<td>pgCC -mp</td>
+<td>mpicxx -mp</td>
+</tr>
+</tbody>
+</table>
+<a href="#top">Back to Top</a>
+<hr>
+<h3 id="using-the-gnu-compilers"><span class="header-section-number">1.3.4</span> <a name="compilers-gnu"></a>Using the GNU Compilers</h3>
+<p>The GNU compilers can be loaded by executing the following commands at the Linux prompt or placing in your startup files (~/.cshrc or ~/.bashrc)</p>
+<pre><code>module purge
+module load gnutools
+module load gnu openmpi_ib</code></pre>
+<p>For AVX support, compile with -mavx. Note that AVX support is only available in version 4.7 or later, so it is necessary to explicitly load the gnu/4.9.2 module until such time that it becomes the default.</p>
+<p>For more information on the GNU compilers: man [gfortran | gcc | g++]</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Serial</th>
+<th>MPI</th>
+<th>OpenMP</th>
+<th>MPI+OpenMP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fortran</td>
+<td>gfortran</td>
+<td>mpif90</td>
+<td>gfortran -fopenmp</td>
+<td>mpif90 -fopenmp</td>
+</tr>
+<tr class="even">
+<td>C</td>
+<td>gcc</td>
+<td>mpicc</td>
+<td>gcc -fopenmp</td>
+<td>mpicc -fopenmp</td>
+</tr>
+<tr class="odd">
+<td>C++</td>
+<td>g++</td>
+<td>mpicxx</td>
+<td>g++ -fopenmp</td>
+<td>mpicxx -fopenmp</td>
+</tr>
+</tbody>
+</table>
+<a href="#top">Back to Top</a>
+<hr>
+<h2 id="running-jobs-on-comet"><span class="header-section-number">1.4</span> <a name="runningjobs"></a>Running Jobs on Comet</h2>
+<h3 id="command-line-jobs"><span class="header-section-number">1.4.1</span> <a name="running-jobs-cmdline"></a>Command Line Jobs</h3>
+<p><em>Do not run on the login nodes - even for simple tests</em>. These nodes are meant for compilation, file editing, simple data analysis, and other tasks that use minimal compute resources. Even if you could run a simple test on the command line on the login node, full tests should not be run on the login node because the performance will be adversely impacted by all the other tasks and login activities of the other users who are logged onto the same node. For example, at the moment that this note was writeen, a <code>gzip</code> process was consuming 98% of the CPU time:</p>
+<pre><code>[username@comet-ln3 OPENMP]$ top
+...
+  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND                                      
+19937 XXXXX     20   0  4304  680  300 R 98.2  0.0   0:19.45 gzip</code></pre>
+<h3 id="running-jobs-using-slurm"><span class="header-section-number">1.4.2</span> <a name="running-jobs-slurm"></a>Running Jobs using SLURM</h3>
+<ul>
+<li>All jobs must be run via the Slurm scheduling infrastructure. There are two types of jobs:
+<ul>
+<li>Interactive Jobs: Use <code>srun</code> command: <code>srun --pty --nodes=1 --ntasks-per-node=24 -p debug -t 00:30:00 --wait 0 /bin/bash</code></li>
+<li>Batch Jobs: Submit batch scripts from the login nodes. Can set environment variables in the shell or in the batch script, including:
+<ul>
+<li>Partition (also call qeueing system, details on upcoming slide)</li>
+<li>Time limit for a job (maximum of 48 hours; longer on request)</li>
+<li>Number of nodes, tasks per node</li>
+<li>Memory requirements (if any)</li>
+<li>Job name, output file location</li>
+<li>Email info, configuration</li>
+</ul></li>
+</ul></li>
+</ul>
+<a href="#top">Back to Top</a>
+<hr>
+<h3 id="batch-jobs-using-slurm"><span class="header-section-number">1.4.3</span> <a name="slurm-batch-jobs"></a>Batch Jobs using SLURM:</h3>
+<p>Comet uses the Simple Linux Utility for Resource Management (SLURM) batch environment. For more details, see the section on Running job in the Comet User Guide: http://www.sdsc.edu/support/user_guides/comet.html#running</p>
+<h3 id="slurm-partitions"><span class="header-section-number">1.4.4</span> Slurm Partitions</h3>
+<p><img src="images/comet-queue-names.png" alt="Comet Queue Names" width="500px" /></p>
+<pre><code>Specified using -p option in batch script. For example:
+#SBATCH -p gpu</code></pre>
+<p><a href="#top">Back to Top</a></p>
+<hr>
+<h3 id="slurm-commands"><span class="header-section-number">1.4.5</span> <a name="slurm-commands"></a>Slurm Commands</h3>
+<p>Here are a few key Slurm commands. For more information, run the <code>man slurm</code> or see this page:</p>
+<ul>
+<li>To Submit jobs using the <code>sbatch</code> command:</li>
+</ul>
+<pre><code>$ sbatch Localscratch-slurm.sb 
+Submitted batch job 8718049</code></pre>
+<ul>
+<li>To check job status using the squeue command:</li>
+</ul>
+<pre><code>$ squeue -u $USER
+             JOBID PARTITION     NAME     USER      ST       TIME  NODES  NODELIST(REASON)
+           8718049   compute       localscr mahidhar   PD       0:00       1               (Priority)</code></pre>
+<ul>
+<li>Once the job is running, you will see the job status change:</li>
+</ul>
+<pre><code>$ squeue -u $USER
+             JOBID PARTITION     NAME     USER    ST       TIME  NODES  NODELIST(REASON)
+           8718064     debug        localscr mahidhar   R         0:02      1           comet-14-01</code></pre>
+<ul>
+<li>To cancel a job, use the <code>scancel</code> along with the <code>JOBID</code>:
+<ul>
+<li>$scancel <jobid></li>
+</ul></li>
+</ul>
+<a href="#top">Back to Top</a>
+<hr>
+<pre><code>## &lt;a name=&quot;putting-it-all-together&quot;&gt;&lt;/a&gt;Putting it all Together
+
+### &lt;a name=&quot;helloworld-mpi&quot;&gt;&lt;/a&gt;Hello World (MPI)
+
+* Change to the MPI examples directory (assuming you already copied the ):</code></pre>
+<p>[username@comet-ln3 PHYS244]$ cd MPI [username@comet-ln3 MPI]$ ll total 461 drwxr-xr-x 4 username use300 6 Aug 5 19:02 . drwxr-xr-x 16 username use300 16 Aug 5 19:02 .. -rwxr-xr-x 1 username use300 721912 Aug 5 19:02 hello_mpi -rw-r–r– 1 username use300 328 Aug 5 19:02 hello_mpi.f90 drwxr-xr-x 2 username use300 3 Aug 5 19:02 IBRUN drwxr-xr-x 2 username use300 3 Aug 5 19:02 MPIRUN_RSH `` [username@comet-ln3 OPENMP]$cat ../MPI/hello_mpi.f90 ! Fortran example<br />
+program hello include ‘mpif.h’ integer rank, size, ierror, tag, status(MPI_STATUS_SIZE)</p>
+<p>call MPI_INIT(ierror) call MPI_COMM_SIZE(MPI_COMM_WORLD, size, ierror) call MPI_COMM_RANK(MPI_COMM_WORLD, rank, ierror) print*, ‘node’, rank, ‘: Hello and Welcome to Webinar Participants!’ call MPI_FINALIZE(ierror) end ```</p>
+<ul>
+<li>Note that there is already a compiled version of the <code>hello_mpi.f90</code> code. If you try to run this from the command line, in the current environment, it will fail:</li>
+</ul>
+<pre><code>[[username@comet-ln3 MPI]$ mpirun -np 4 ./hello_mpi
+LiMIC: (limic_open) file open fail
+LiMIC: (limic_open) file open fail
+LiMIC: (limic_open) file open fail
+LiMIC: (limic_open) file open fail
+[cli_0]: aborting job:
+Fatal error in MPI_Init:
+Other MPI error, error stack:
+MPIR_Init_thread(514)....:
+MPID_Init(359)...........: channel initialization failed
+MPIDI_CH3_Init(446)......:
+MPIDI_CH3I_SMP_Init(2313): LiMIC2 device does not exist: No such file or directory</code></pre>
+<p>We will use the SLURM job scheduler to run this code (see batch jobs below). We will make a new compiled version, so you can back this file up to use for testing/checking your work:</p>
+<pre><code>[username@comet-ln3 MPI]$ mv hello_mpi hello_mpi.bak
+[username@comet-ln3 MPI]$ ls -al
+total 863
+drwxr-xr-x  4 username use300      7 Aug  5 19:11 .
+drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
+-rwxr-xr-x  1 username use300 721912 Aug  5 19:11 hello_mpi.bak
+-rw-r--r--  1 username use300    328 Aug  5 19:02 hello_mpi.f90
+drwxr-xr-x  2 username use300      3 Aug  5 19:02 IBRUN
+drwxr-xr-x  2 username use300      3 Aug  5 19:02 MPIRUN_RSH</code></pre>
+<p>Note: there are two directories that contain code needed to run the jobs in the parallel/slurm environment. Please don’t change or edit them at this time.</p>
+<ul>
+<li>Frist, we should verify that the user environment is correct for running the examples we will work with in this tutorial.</li>
+</ul>
+<pre><code>[username@comet-ln3 MPI]$ module list
+Currently Loaded Modulefiles:
+  1) intel/2013_sp1.2.144   2) mvapich2_ib/2.1        3) gnutools/2.69</code></pre>
+<ul>
+<li>If you have trouble with your modules, you can remove them (purge) and then reload them. After purging, the PATH variable has fewer path directories available:</li>
+</ul>
+<pre><code>[username@comet-ln3 ~]$ module purge
+[username@comet-ln3 ~]$ echo $PATH
+/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/ibutils/bin:/usr/java/latest/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/home/username/bin
+[username@comet-ln3 ~]$  
+</code></pre>
+<ul>
+<li>Next, you reload the modules that you need:</li>
+</ul>
+<pre><code>[username@comet-ln3 ~]$ module load intel
+[username@comet-ln3 ~]$ module load mvapich2_ib
+[username@comet-ln3 ~]$ module load gnutools
+[username@comet-ln3 ~]$</code></pre>
+<ul>
+<li>You will see that there are more paths in the list:</li>
+</ul>
+<pre><code>[username@comet-ln3 ~]$ echo $PATH
+/opt/gnu/gcc/bin:/opt/gnu/bin:/opt/mvapich2/intel/ib/bin:/opt/intel/composer_xe_2013_sp1.2.144/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/mpirt/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/debugger/gdb/intel64_mic/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/ibutils/bin:/usr/java/latest/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/home/username/bin</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+<h4 id="hello-world-mpi-compiling"><span class="header-section-number">1.4.5.1</span> <a name="helloworld-mpi-compile"></a>Hello World (MPI): Compiling</h4>
+<ul>
+<li>Compile the MPI hello world code.</li>
+<li>For this, we use the command <code>mpif90</code>, which is loaded into your environment when you loaded the modules above.</li>
+<li>To see where the command is located, use the <code>which</code> command:</li>
+</ul>
+<pre><code>[username@comet-ln3 MPI]$ which mpif90
+/opt/mvapich2/intel/ib/bin/mpif90</code></pre>
+<ul>
+<li>Compile the code:</li>
+</ul>
+<pre><code>mpif90 -o hello_mpi hello_mpi.f90</code></pre>
+<ul>
+<li>Verify that the executable has been created:</li>
+</ul>
+<pre><code>[username@comet-ln3 MPI]$ ll -al
+total 854
+drwxr-xr-x  4 username use300      7 Aug  5 19:18 .
+drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
+-rwxr-xr-x  1 username use300 721912 Aug  5 19:18 hello_mpi
+-rwxr-xr-x  1 username use300 721912 Aug  5 19:11 hello_mpi.bak
+-rw-r--r--  1 username use300    328 Aug  5 19:02 hello_mpi.f90
+drwxr-xr-x  2 username use300      3 Aug  5 19:02 IBRUN
+drwxr-xr-x  2 username use300      3 Aug  5 19:02 MPIRUN_RSH</code></pre>
+<h4 id="hello-world-mpi-interactive-jobs"><span class="header-section-number">1.4.5.2</span> <a name="helloworld-mpi-interactive"></a>Hello World (MPI): Interactive Jobs</h4>
+<ul>
+<li>To run MPI (or other executables) from the command line, you need to use the “Interactive” nodes.</li>
+<li>To launch the nodes (to get allocated a set of nodes), use the <code>srun</code> command. This example will request one node, all 24 cores, in the debug partition for 30 minutes:</li>
+</ul>
+<pre><code>[username@comet-ln3 MPI]$ date
+Sun Aug  5 22:54:04 PDT 2018
+[username@comet-ln3 MPI]$ srun --pty --nodes=1 --ntasks-per-node=24 -p debug -t 00:30:00 --wait 0 /bin/bash
+[username@comet-14-01 MPI]$ date
+Sun Aug  5 22:54:20 PDT 2018</code></pre>
+<ul>
+<li>If the cluster is very busy, it may take some time to obtain the nodes. Always check that your module environment is correct.</li>
+<li>Once you have the interactive session, your MPI code will be allowed to execute correctly.</li>
+</ul>
+<pre><code>[username@comet-14-01 MPI]$ mpirun -np 4 ./hello_mpi
+ node           0 : Hello and Welcome to Webinar Participants!
+ node           1 : Hello and Welcome to Webinar Participants!
+ node           2 : Hello and Welcome to Webinar Participants!
+ node           3 : Hello and Welcome to Webinar Participants!
+[username@comet-14-01 MPI]$</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+<h4 id="hello-world-mpi-batch-script-submission"><span class="header-section-number">1.4.5.3</span> <a name="helloworld-mpi-batch-submit"></a>Hello World (MPI): Batch Script Submission</h4>
+<p>To submit jobs to the Slurm queuing system, you need to create a slurm batch job script.</p>
+<ul>
+<li>Change directories to the IBRUN directory using the <code>hellompi-slurm.sb</code> batch script:</li>
+</ul>
+<pre><code>[username@comet-ln3 MPI]$ cd IBRUN/
+[username@comet-ln3 IBRUN]$ cat hellompi-slurm.sb
+#!/bin/bash
+#SBATCH --job-name=&quot;hellompi&quot;
+#SBATCH --output=&quot;hellompi.%j.%N.out&quot;
+#SBATCH --partition=compute
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 01:30:00
+
+#This job runs with 2 nodes, 24 cores per node for a total of 48 cores.
+#ibrun in verbose mode will give binding detail
+
+ibrun -v ../hello_mpi
+</code></pre>
+<ul>
+<li>to run the job, use the command below:</li>
+</ul>
+<pre><code>[username@comet-ln3 IBRUN]$ sbatch hellompi.sb
+Submitted batch job 18343608</code></pre>
+<ul>
+<li>For this class, we will be submitting our jobs to a reservation queue, use the <code>sbatch</code> script below:</li>
+</ul>
+<pre><code>sbatch --res=SI2018DAY1 hellompi-slurm.sb</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+<h4 id="hello-world-mpi-batch-script-output"><span class="header-section-number">1.4.5.4</span> <a name="helloworld-mpi-batch-output"></a>Hello World (MPI): Batch Script Output</h4>
+<ul>
+<li>Check job status using the <code>squeue</code> command.</li>
+</ul>
+<pre><code>[username@comet-ln3 IBRUN]$ sbatch hellompi-slurm.sb; squeue -u username
+Submitted batch job 18345138
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          18345138   compute hellompi  username PD       0:00      2 (None)
+....
+
+[username@comet-ln3 IBRUN]$ squeue -u username
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          18345138   compute hellompi  username  R       0:07      2 comet-21-[47,57]
+[username@comet-ln3 IBRUN]$ squeue -u username
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          18345138   compute hellompi  username CG       0:08      2 comet-21-[47,57]</code></pre>
+<pre><code>* Note: You will see the `ST` column information change when the job status changes: new jobs go into  `SP` (pending); after some time it moves to  `R` (running): when completed, the state changes to `CG` (completed)
+* the JOBID is the job identifer and can be used to track or cancel the job. It is also used as part of the output file name.</code></pre>
+<ul>
+<li>Look at the directory for and output file with the job id as part of the name:</li>
+</ul>
+<pre><code>[username@comet-ln3 IBRUN]$
+total 48
+drwxr-xr-x 2 username use300    5 Aug  5 19:30 .
+drwxr-xr-x 4 username use300    7 Aug  5 19:22 ..
+-rw-r--r-- 1 username use300 3865 Aug  5 19:30 hellompi.18345138.comet-10-58.out
+-rw-r--r-- 1 username use300  342 Aug  5 19:30 hellompi.sb
+-rw-r--r-- 1 username use300  341 Aug  5 19:27 hellompi-slurm.sb</code></pre>
+<ul>
+<li>To see the contents of the output file, use the <code>cat</code> command:</li>
+</ul>
+<pre><code>[username@comet-ln3 IBRUN]$ cat hellompi.18345138.comet-10-58.out
+IBRUN: Command is ../hello_mpi
+IBRUN: Command is /home/username/comet-examples/PHYS244/MPI/hello_mpi
+IBRUN: no hostfile mod needed
+IBRUN: Nodefile is /tmp/0p4Nbx12u1
+
+IBRUN: MPI binding policy: compact/core for 1 threads per rank (12 cores per socket)
+IBRUN: Adding MV2_USE_OLD_BCAST=1 to the environment
+IBRUN: Adding MV2_CPU_BINDING_LEVEL=core to the environment
+IBRUN: Adding MV2_ENABLE_AFFINITY=1 to the environment
+IBRUN: Adding MV2_DEFAULT_TIME_OUT=23 to the environment
+IBRUN: Adding MV2_CPU_BINDING_POLICY=bunch to the environment
+IBRUN: Adding MV2_USE_HUGEPAGES=0 to the environment
+IBRUN: Adding MV2_HOMOGENEOUS_CLUSTER=0 to the environment
+IBRUN: Adding MV2_USE_UD_HYBRID=0 to the environment
+IBRUN: Added 8 new environment variables to the execution environment
+IBRUN: Command string is [mpirun_rsh -np 48 -hostfile /tmp/0p4Nbx12u1 -export-all /home/username/comet-examples/PHYS244/MPI/hello_mpi]
+ node          18 : Hello and Welcome to Webinar Participants!
+ node          17 : Hello and Welcome to Webinar Participants!
+ node          20 : Hello and Welcome to Webinar Participants!
+ node          21 : Hello and Welcome to Webinar Participants!
+ node          22 : Hello and Welcome to Webinar Participants!
+ node           5 : Hello and Welcome to Webinar Participants!
+ node           3 : Hello and Welcome to Webinar Participants!
+ node           6 : Hello and Welcome to Webinar Participants!
+ node          16 : Hello and Welcome to Webinar Participants!
+ node          19 : Hello and Welcome to Webinar Participants!
+ node          14 : Hello and Welcome to Webinar Participants!
+ node          10 : Hello and Welcome to Webinar Participants!
+ node          13 : Hello and Welcome to Webinar Participants!
+ node          15 : Hello and Welcome to Webinar Participants!
+ node           9 : Hello and Welcome to Webinar Participants!
+ node          12 : Hello and Welcome to Webinar Participants!
+ node           4 : Hello and Welcome to Webinar Participants!
+ node          23 : Hello and Welcome to Webinar Participants!
+ node           7 : Hello and Welcome to Webinar Participants!
+ node          11 : Hello and Welcome to Webinar Participants!
+ node           8 : Hello and Welcome to Webinar Participants!
+ node           1 : Hello and Welcome to Webinar Participants!
+ node           2 : Hello and Welcome to Webinar Participants!
+ node           0 : Hello and Welcome to Webinar Participants!
+ node          39 : Hello and Welcome to Webinar Participants!
+ node          38 : Hello and Welcome to Webinar Participants!
+ node          47 : Hello and Welcome to Webinar Participants!
+ node          45 : Hello and Welcome to Webinar Participants!
+ node          42 : Hello and Welcome to Webinar Participants!
+ node          35 : Hello and Welcome to Webinar Participants!
+ node          28 : Hello and Welcome to Webinar Participants!
+ node          32 : Hello and Welcome to Webinar Participants!
+ node          40 : Hello and Welcome to Webinar Participants!
+ node          44 : Hello and Welcome to Webinar Participants!
+ node          41 : Hello and Welcome to Webinar Participants!
+ node          30 : Hello and Welcome to Webinar Participants!
+ node          31 : Hello and Welcome to Webinar Participants!
+ node          29 : Hello and Welcome to Webinar Participants!
+ node          37 : Hello and Welcome to Webinar Participants!
+ node          43 : Hello and Welcome to Webinar Participants!
+ node          46 : Hello and Welcome to Webinar Participants!
+ node          34 : Hello and Welcome to Webinar Participants!
+ node          26 : Hello and Welcome to Webinar Participants!
+ node          24 : Hello and Welcome to Webinar Participants!
+ node          27 : Hello and Welcome to Webinar Participants!
+ node          25 : Hello and Welcome to Webinar Participants!
+ node          33 : Hello and Welcome to Webinar Participants!
+ node          36 : Hello and Welcome to Webinar Participants!
+IBRUN: Job ended with value 0
+[username@comet-ln3 IBRUN]$</code></pre>
+<ul>
+<li>Note the order in which the output was written into the output file. There is an entry for each of the 48 cores (2 nodes, 24 cores/node), but the output is not ordered. This is typical because the time for each core to start and finish its work is asynchronous.</li>
+</ul>
+<a href="#top">Back to Top</a>
+<hr>
+<h3 id="hello-world-openmp"><span class="header-section-number">1.4.6</span> <a name="helloworld-omp"></a>Hello World (OpenMP)</h3>
+<p>Change to the OPENMP examples directory:</p>
+<pre><code>[username@comet-ln3 PHYS244]$ cd OPENMP/
+[username@comet-ln3 OPENMP]$ ls -al
+total 479
+drwxr-xr-x  2 username use300      6 Aug  5 22:19 .
+drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
+-rwxr-xr-x  1 username use300 728112 Aug  5 19:02 hello_openmp
+-rw-r--r--  1 username use300    267 Aug  5 22:19 hello_openmp.f90
+-rw-r--r--  1 username use300    310 Aug  5 19:02 openmp-slurm.sb
+-rw-r--r--  1 username use300    347 Aug  5 19:02 openmp-slurm-shared.sb
+
+[username@comet-ln3 OPENMP]$ cat hello_openmp.f90
+      PROGRAM OMPHELLO
+      INTEGER TNUMBER
+      INTEGER OMP_GET_THREAD_NUM
+
+!$OMP PARALLEL DEFAULT(PRIVATE)
+      TNUMBER = OMP_GET_THREAD_NUM()
+      PRINT *, &#39;Hello from Thread Number[&#39;,TNUMBER,&#39;] and Welcome Webinar!&#39;
+!$OMP END PARALLEL
+
+      STOP
+      END</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+<h4 id="hello-world-openmp-compiling"><span class="header-section-number">1.4.6.1</span> <a name="helloworld-omp-compile"></a>Hello World (OpenMP): Compiling</h4>
+<p>Note that there is already a compiled version of the <code>hello_openmp.f90</code> code. You can save or delete this version.</p>
+<ul>
+<li>To compile the source code, use the <code>ifort</code> command, and check that it was created:</li>
+</ul>
+<pre><code>[username@comet-ln3 OPENMP]$ ifort -o hello_openmp -openmp hello_openmp.f90
+[username@comet-ln3 OPENMP]$ ls -al
+total 479
+drwxr-xr-x  2 username use300      6 Aug  2 22:33 .
+drwxr-xr-x 16 username use300     16 Aug  2 19:02 ..
+-rwxr-xr-x  1 username use300 728192 Aug  2 22:33 hello_openmp
+-rw-r--r--  1 username use300    267 Aug  2 22:19 hello_openmp.f90
+-rw-r--r--  1 username use300    310 Aug  2 19:02 openmp-slurm.sb
+-rw-r--r--  1 username use300    347 Aug  2 19:02 openmp-slurm-shared.sb
+</code></pre>
+<ul>
+<li>Note that if you try to run OpenMP code from the command line, in the current environment, the code will run (because it is based on Pthreads, which exist on the node):</li>
+</ul>
+<pre><code>[username@comet-ln2 OPENMP]$ ./hello_openmp
+ Hello from Thread Number[          12 ] and Welcome Webinar!
+ Hello from Thread Number[          14 ] and Welcome Webinar!
+ Hello from Thread Number[           5 ] and Welcome Webinar!
+ Hello from Thread Number[          20 ] and Welcome Webinar!
+ Hello from Thread Number[           8 ] and Welcome Webinar!
+ Hello from Thread Number[          15 ] and Welcome Webinar!
+ Hello from Thread Number[           4 ] and Welcome Webinar!
+ Hello from Thread Number[           0 ] and Welcome Webinar!
+ Hello from Thread Number[          23 ] and Welcome Webinar!
+ Hello from Thread Number[          11 ] and Welcome Webinar!
+ Hello from Thread Number[           7 ] and Welcome Webinar!
+ Hello from Thread Number[          17 ] and Welcome Webinar!
+ Hello from Thread Number[           9 ] and Welcome Webinar!
+ Hello from Thread Number[           2 ] and Welcome Webinar!
+ Hello from Thread Number[          22 ] and Welcome Webinar!
+ Hello from Thread Number[           3 ] and Welcome Webinar!
+ Hello from Thread Number[          13 ] and Welcome Webinar!
+ Hello from Thread Number[          18 ] and Welcome Webinar!
+ Hello from Thread Number[           1 ] and Welcome Webinar!
+ Hello from Thread Number[          16 ] and Welcome Webinar!
+ Hello from Thread Number[          10 ] and Welcome Webinar!
+ Hello from Thread Number[          19 ] and Welcome Webinar!
+ Hello from Thread Number[          21 ] and Welcome Webinar!
+ Hello from Thread Number[           6 ] and Welcome Webinar!</code></pre>
+<ul>
+<li>In the example below, we used the OpenMP feature to set the number of threads from the command line.</li>
+</ul>
+<pre><code>[username@comet-ln3 OPENMP]$ export OMP_NUM_THREADS=4; ./hello_openmp
+ HELLO FROM THREAD NUMBER =            3
+ HELLO FROM THREAD NUMBER =            1
+ HELLO FROM THREAD NUMBER =            2
+ HELLO FROM THREAD NUMBER =            0</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+<h4 id="hello-world-openmp-batch-script-submission"><span class="header-section-number">1.4.6.2</span> <a name="helloworld-omp-batch-submit"></a>Hello World (OpenMP): Batch Script submission</h4>
+<p>The submit script is openmp-slurm.sb:</p>
+<pre><code>[username@comet-ln2 OPENMP]$ cat openmp-slurm.sb
+#!/bin/bash
+#SBATCH --job-name=&quot;hello_openmp&quot;
+#SBATCH --output=&quot;hello_openmp.%j.%N.out&quot;
+#SBATCH --partition=compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 01:30:00
+
+#SET the number of openmp threads
+export OMP_NUM_THREADS=24
+
+#Run the job using mpirun_rsh
+./hello_openmp</code></pre>
+<ul>
+<li>to submit use the sbatch command:</li>
+</ul>
+<pre><code>[username@comet-ln2 OPENMP]$ sbatch openmp-slurm.sb
+[username@comet-ln2 OPENMP]$ sbatch openmp-slurm.sb ;        
+!Submitted batch job 18346700
+[username@comet-ln2 OPENMP]$ squeue -u username
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          18346700   compute hell_omp  username  R       0:00      1 comet-12-65
+          ...</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+<h4 id="hello-world-openmp-batch-script-output"><span class="header-section-number">1.4.6.3</span> <a name="helloworld-omp-batch-output"></a>Hello World (OpenMP): Batch Script Output</h4>
+<ul>
+<li>Once the job is finished:</li>
+</ul>
+<pre><code>cat hello_openmp.18346700.comet-12-65.out
+ Hello from Thread Number[          16 ] and Welcome Webinar!
+ Hello from Thread Number[          23 ] and Welcome Webinar!
+ Hello from Thread Number[          12 ] and Welcome Webinar!
+ Hello from Thread Number[           0 ] and Welcome Webinar!
+ Hello from Thread Number[           2 ] and Welcome Webinar!
+ Hello from Thread Number[           9 ] and Welcome Webinar!
+ Hello from Thread Number[           1 ] and Welcome Webinar!
+ Hello from Thread Number[          18 ] and Welcome Webinar!
+ Hello from Thread Number[          13 ] and Welcome Webinar!
+ Hello from Thread Number[          17 ] and Welcome Webinar!
+ Hello from Thread Number[           3 ] and Welcome Webinar!
+ Hello from Thread Number[          22 ] and Welcome Webinar!
+ Hello from Thread Number[           7 ] and Welcome Webinar!
+ Hello from Thread Number[          10 ] and Welcome Webinar!
+ Hello from Thread Number[           4 ] and Welcome Webinar!
+ Hello from Thread Number[           8 ] and Welcome Webinar!
+ Hello from Thread Number[           5 ] and Welcome Webinar!
+ Hello from Thread Number[           6 ] and Welcome Webinar!
+ Hello from Thread Number[          15 ] and Welcome Webinar!
+ Hello from Thread Number[          20 ] and Welcome Webinar!
+ Hello from Thread Number[          11 ] and Welcome Webinar!
+ Hello from Thread Number[          19 ] and Welcome Webinar!
+ Hello from Thread Number[          21 ] and Welcome Webinar!
+ Hello from Thread Number[          14 ] and Welcome Webinar!</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+<h3 id="hybrid-mpi-openmp-jobs"><span class="header-section-number">1.4.7</span> <a name="hybrid-mpi-omp"></a>Hybrid (MPI + OpenMP) Jobs</h3>
+<p>Several HPC codes use a hybrid MPI, OpenMP approach. * <code>ibrun</code> wrapper developed to handle such hybrid use cases. Automatically senses the MPI build (mvapich2, openmpi) and binds tasks correctly. * <code>ibrun -help</code> gives detailed usage info. * hello_hybrid.c is a sample code, and hello_hybrid.cmd shows “ibrun” usage. * Change to the HYBRID examples directory:</p>
+<pre><code>[username@comet-ln2 PHYS244]$ cd HYBRID/
+[username@comet-ln2 HYBRID]$ ll
+total 94
+drwxr-xr-x  2 username use300      5 Aug  5 19:02 .
+drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
+-rwxr-xr-x  1 username use300 103032 Aug  5 19:02 hello_hybrid
+-rw-r--r--  1 username use300    636 Aug  5 19:02 hello_hybrid.c
+-rw-r--r--  1 username use300    390 Aug  5 19:02 hybrid-slurm.sb</code></pre>
+<ul>
+<li>Look at the contents of the <code>hello_hybrid.c</code> file</li>
+</ul>
+<pre><code>[username@comet-ln2 HYBRID]$ cat hello_hybrid.c
+#include &lt;stdio.h&gt;
+#include &quot;mpi.h&quot;
+#include &lt;omp.h&gt;
+
+int main(int argc, char *argv[]) {
+  int numprocs, rank, namelen;
+  char processor_name[MPI_MAX_PROCESSOR_NAME];
+  int iam = 0, np = 1;
+
+  MPI_Init(&amp;argc, &amp;argv);
+  MPI_Comm_size(MPI_COMM_WORLD, &amp;numprocs);
+  MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank);
+  MPI_Get_processor_name(processor_name, &amp;namelen);
+
+  #pragma omp parallel default(shared) private(iam, np)
+  {
+    np = omp_get_num_threads();
+    iam = omp_get_thread_num();
+    printf(&quot;Hello Webinar participants from thread %d out of %d from process %d out of %d on %s\n&quot;,
+           iam, np, rank, numprocs, processor_name);
+  }
+
+  MPI_Finalize();
+}</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+<h4 id="hybrid-mpi-openmp-compiling"><span class="header-section-number">1.4.7.1</span> <a name="hybrid-mpi-omp-compile"></a>Hybrid (MPI + OpenMP): Compiling</h4>
+<ul>
+<li>To compile the hybrid MPI + OpenMPI code, we need to refer to the table of compilers listed above (and listed in the user guide).</li>
+<li>We will use the command <code>mpicx -openmp</code></li>
+</ul>
+<pre><code>[username@comet-ln2 HYBRID]$ mpicc -openmp -o hello_hybrid hello_hybrid.c
+[username@comet-ln2 HYBRID]$ ll
+total 39
+drwxr-xr-x  2 username use300      5 Aug  6 00:12 .
+drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
+-rwxr-xr-x  1 username use300 103032 Aug  6 00:12 hello_hybrid
+-rw-r--r--  1 username use300    636 Aug  5 19:02 hello_hybrid.c
+-rw-r--r--  1 username use300    390 Aug  5 19:02 hybrid-slurm.sb
+</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+<h4 id="hybrid-mpi-openmp-batch-script-submission"><span class="header-section-number">1.4.7.2</span> <a name="hybrid-mpi-omp-submit"></a>Hybrid (MPI + OpenMP): Batch Script Submission</h4>
+<ul>
+<li>To submit the hybrid code, we still use the <code>ibrun</code> command.</li>
+<li>In this example, we set the number of threads explicitly.</li>
+</ul>
+<pre><code>[username@comet-ln2 HYBRID]$ cat hybrid-slurm.sb
+#!/bin/bash
+#SBATCH --job-name=&quot;hellohybrid&quot;
+#SBATCH --output=&quot;hellohybrid.%j.%N.out&quot;
+#SBATCH --partition=compute
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 01:30:00
+
+#This job runs with 2 nodes, 24 cores per node for a total of 48 cores.
+# We use 8 MPI tasks and 6 OpenMP threads per MPI task
+
+export OMP_NUM_THREADS=6
+ibrun --npernode 4 ./hello_hybrid</code></pre>
+<ul>
+<li>Submit the job to the Slurm queue, and check the job status</li>
+</ul>
+<pre><code>[username@comet-ln2 HYBRID]$ sbatch hybrid-slurm.sb
+Submitted batch job 18347079
+[username@comet-ln2 HYBRID]$ squeue -u username
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          18347079   compute hellohyb  username  R       0:04      2 comet-01-[01,04]
+[username@comet-ln2 HYBRID]$ ll</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+<h4 id="hybrid-mpi-openmp-batch-script-output"><span class="header-section-number">1.4.7.3</span> <a name="hybrid-mpi-omp-output"></a>Hybrid (MPI + OpenMP): Batch Script Output</h4>
+<pre><code>[username@comet-ln2 HYBRID]$ ll
+total 122
+drwxr-xr-x  2 username use300      6 Aug  6 00:12 .
+drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
+-rwxr-xr-x  1 username use300 103032 Aug  6 00:12 hello_hybrid
+-rw-r--r--  1 username use300   3696 Aug  6 00:12 hellohybrid.18347079.comet-01-01.out
+-rw-r--r--  1 username use300    636 Aug  5 19:02 hello_hybrid.c
+-rw-r--r--  1 username use300    390 Aug  5 19:02 hybrid-slurm.sb
+[username@comet-ln2 HYBRID]$ cat hellohybrid.18347079.comet-01-01.out
+Hello from thread 4 out of 6 from process 3 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 3 out of 6 from process 2 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 0 out of 6 from process 1 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 2 out of 6 from process 2 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 1 out of 6 from process 3 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 2 out of 6 from process 1 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 4 out of 6 from process 2 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 0 out of 6 from process 3 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 3 out of 6 from process 1 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 5 out of 6 from process 2 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 3 out of 6 from process 3 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 4 out of 6 from process 1 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 0 out of 6 from process 2 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 2 out of 6 from process 3 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 5 out of 6 from process 1 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 5 out of 6 from process 3 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 3 out of 6 from process 0 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 2 out of 6 from process 0 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 0 out of 6 from process 0 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 4 out of 6 from process 0 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 5 out of 6 from process 0 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 1 out of 6 from process 2 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 1 out of 6 from process 1 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 1 out of 6 from process 0 out of 8 on comet-01-01.sdsc.edu
+Hello from thread 0 out of 6 from process 7 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 0 out of 6 from process 6 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 2 out of 6 from process 7 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 2 out of 6 from process 6 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 3 out of 6 from process 7 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 5 out of 6 from process 6 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 4 out of 6 from process 6 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 1 out of 6 from process 7 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 4 out of 6 from process 7 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 1 out of 6 from process 6 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 0 out of 6 from process 4 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 5 out of 6 from process 4 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 2 out of 6 from process 4 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 1 out of 6 from process 4 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 3 out of 6 from process 4 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 4 out of 6 from process 4 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 0 out of 6 from process 5 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 1 out of 6 from process 5 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 4 out of 6 from process 5 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 2 out of 6 from process 5 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 5 out of 6 from process 5 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 3 out of 6 from process 6 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 5 out of 6 from process 7 out of 8 on comet-01-04.sdsc.edu
+Hello from thread 3 out of 6 from process 5 out of 8 on comet-01-04.sdsc.edu
+[username@comet-ln2 HYBRID]$</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+<h3 id="compiling-cuda-example-gpu"><span class="header-section-number">1.4.8</span> <a name="mat-mul-gpu"></a>Compiling CUDA Example (GPU)</h3>
+<ul>
+<li>Comet GPU Nodes
+<ul>
+<li>2 NVIDIA K-80 Cards (4 GPUs total) per node.</li>
+<li>Takes longer to run CUDA jobs.</li>
+</ul></li>
+<li>Change to the CUDA example directory:</li>
+</ul>
+<pre><code>[mthomas@comet-ln2/comet-examples/PHYS244]$ cd /home/mthomas/comet-examples/PHYS244/CUDA
+[mthomas@comet-ln2 CUDA]$ ls -al
+total 427
+drwxr-xr-x  2 mthomas use300     11 Aug  5 19:02 .
+drwxr-xr-x 16 mthomas use300     16 Aug  5 19:02 ..
+-rw-r--r--  1 mthomas use300    446 Aug  5 19:02 CUDA.8718375.comet-30-08.out
+-rw-r--r--  1 mthomas use300    253 Aug  5 19:02 cuda.sb
+-rw-r--r--  1 mthomas use300   5106 Aug  5 19:02 exception.h
+-rw-r--r--  1 mthomas use300   1168 Aug  5 19:02 helper_functions.h
+-rw-r--r--  1 mthomas use300  29011 Aug  5 19:02 helper_image.h
+-rw-r--r--  1 mthomas use300  23960 Aug  5 19:02 helper_string.h
+-rw-r--r--  1 mthomas use300  15414 Aug  5 19:02 helper_timer.h
+-rwxr-xr-x  1 mthomas use300 533168 Aug  5 19:02 matmul
+-rw-r--r--  1 mthomas use300  13482 Aug  5 19:02 matrixMul.cu</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+<h3 id="compiling-cuda-example-gpu-1"><span class="header-section-number">1.4.9</span> <a name="mat-mul-gpu-compile"></a>Compiling CUDA Example (GPU)</h3>
+<ul>
+<li>Load the CUDA module:</li>
+</ul>
+<pre><code>[mthomas@comet-ln2 CUDA]$ module list
+Currently Loaded Modulefiles:
+  1) intel/2013_sp1.2.144   2) mvapich2_ib/2.1        3) gnutools/2.69
+[mthomas@comet-ln2 CUDA]$
+[mthomas@comet-ln2 CUDA]$ module load cuda
+[mthomas@comet-ln2 CUDA]$ module list
+Currently Loaded Modulefiles:
+  1) intel/2013_sp1.2.144   2) mvapich2_ib/2.1        3) gnutools/2.69          4) cuda/7.0
+[mthomas@comet-ln2 CUDA]$</code></pre>
+<ul>
+<li>Compile the code:</li>
+</ul>
+<pre><code>[mthomas@comet-ln2 CUDA]$ nvcc -o matmul -I.  matrixMul.cu
+[mthomas@comet-ln2 CUDA]$ ll
+total 172
+drwxr-xr-x  2 mthomas use300     13 Aug  6 00:53 .
+drwxr-xr-x 16 mthomas use300     16 Aug  5 19:02 ..
+-rw-r--r--  1 mthomas use300    458 Aug  6 00:35 CUDA.18347152.comet-33-02.out
+-rw-r--r--  1 mthomas use300    458 Aug  6 00:37 CUDA.18347157.comet-33-02.out
+-rw-r--r--  1 mthomas use300    446 Aug  5 19:02 CUDA.8718375.comet-30-08.out
+-rw-r--r--  1 mthomas use300    253 Aug  5 19:02 cuda.sb
+-rw-r--r--  1 mthomas use300   5106 Aug  5 19:02 exception.h
+-rw-r--r--  1 mthomas use300   1168 Aug  5 19:02 helper_functions.h
+-rw-r--r--  1 mthomas use300  29011 Aug  5 19:02 helper_image.h
+-rw-r--r--  1 mthomas use300  23960 Aug  5 19:02 helper_string.h
+-rw-r--r--  1 mthomas use300  15414 Aug  5 19:02 helper_timer.h
+-rwxr-xr-x  1 mthomas use300 533168 Aug  6 00:53 matmul
+-rw-r--r--  1 mthomas use300  13482 Aug  6 00:50 matrixMul.cu</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+<h4 id="hello-world-gpu-submit"><span class="header-section-number">1.4.9.1</span> <a name="mat-mul-gpu-batch-submit"></a>Hello World (GPU): Submit</h4>
+<ul>
+<li>Contents of the slurm script:</li>
+</ul>
+<pre><code>[mthomas@comet-ln2 CUDA]$ cat cuda.sb
+#!/bin/bash
+#SBATCH --job-name=&quot;CUDA&quot;
+#SBATCH --output=&quot;CUDA.%j.%N.out&quot;
+#SBATCH --partition=gpu-shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=6
+#SBATCH --gres=gpu:1
+#SBATCH -t 01:00:00
+
+#Load the cuda module
+module load cuda
+
+#Run the job
+./matmul</code></pre>
+<ul>
+<li>Submit the job:</li>
+</ul>
+<pre><code>[mthomas@comet-ln2 CUDA]$ sbatch cuda.sb
+Submitted batch job 18347288</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+<h4 id="hello-world-gpu-output"><span class="header-section-number">1.4.9.2</span> <a name="mat-mul-gpu-batch-output"></a>Hello World (GPU): Output</h4>
+<pre><code>[mthomas@comet-ln2 CUDA]$ cat CUDA.18347288.comet-33-01.out
+[Matrix Multiply Using CUDA] - Starting...
+[Matrix Multiply Using CUDA] - Welcome SI18 Attendees...
+
+GPU Device 0: &quot;Tesla P100-PCIE-16GB&quot; with compute capability 6.0
+
+MatrixA(320,320), MatrixB(640,320)
+Computing result using CUDA Kernel...
+done
+Performance= 1703.30 GFlop/s, Time= 0.077 msec, Size= 131072000 Ops, WorkgroupSize= 1024 threads/block
+Checking computed result for correctness: Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+</code></pre>
+<ul>
+<li>monitor the job:</li>
+</ul>
+<pre><code>squeue -u mthomas
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          18347288 gpu-share     CUDA  mthomas PD       0:00      1 (None)
+[mthomas@comet-ln2 CUDA]$</code></pre>
+<a href="#top">Back to Top</a>
+<hr>
+</body>
+</html>
