@@ -1214,7 +1214,8 @@ are allocated as separate resources. Make sure you have enough allocations and t
 you are using the right account.
 
 * Comet GPU Hardware:
-<a name="gpu-hardware"></a><img src="images/comet-gpu-hardware.png" alt="Comet GPU Hardware" width="300px" />
+
+<a name="gpu-hardware"></a><img src="images/comet-gpu-hardware.png" alt="Comet GPU Hardware" width="500px" />
 
 * Load the CUDA module:
 ```
