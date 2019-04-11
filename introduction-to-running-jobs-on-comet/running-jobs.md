@@ -58,17 +58,17 @@ Requirements:
         * [Hybrid (MPI + OpenMP): Batch Script Output](#hybrid-mpi-omp-output)
 
 * [Compiling and Running GPU/CUDA Jobs](#comp-and-run-cuda-jobs)
-    * [Hello World (GPU) ](#hello-world-gpu)
-        * [Hello World (GPU) ](#hello-world-gpu-compile)
-        * [Hello World (GPU) ](#hello-world-gpu-batch-submit)
-        * [Hello World (GPU) ](#hello-world-gpu-batch-output)
+    * [GPU Hello World (GPU) ](#hello-world-gpu)
+        * [GPU Hello World: Compiling](#hello-world-gpu-compile)
+        * [GPU Hello World: Batch Script Submission](#hello-world-gpu-batch-submit)
+        * [GPU Hello World: Batch Job Output](#hello-world-gpu-batch-output)
     * [GPU Enumeration ](#enum-gpu)
         * [GPU Enumeration: Compiling](#enum-gpu-compile)
-        * [GPU Enumeration: Batch Script submission](#enum-gpu-batch-submit)
+        * [GPU Enumeration: Batch Script Submission](#enum-gpu-batch-submit)
         * [GPU Enumeration: Batch Job Output](#enum-gpu-batch-output )
     * [CUDA Mat-Mult](#mat-mul-gpu)
         * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
-        * [Matrix Mult. (GPU): Batch Script submission](#mat-mul-gpu-batch-submit)
+        * [Matrix Mult. (GPU): Batch Script Submission](#mat-mul-gpu-batch-submit)
         * [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output )
 
 [Back to Top](#top)
@@ -977,7 +977,7 @@ drwxr-xr-x 16 username use300     16 Aug  2 19:02 ..
 [Back to Top](#top)
 <hr>
 
-#### <a name="helloworld-omp-batch-submit"></a>Hello World (OpenMP): Batch Script submission
+#### <a name="helloworld-omp-batch-submit"></a>Hello World (OpenMP): Batch Script Submission
 The submit script is openmp-slurm.sb:
 
 ```
@@ -1285,7 +1285,7 @@ Check your environment and use the CUDA <b>`nvcc`</b> command:
 ### <a name="enum-gpu"></a>GPU/CUDA Example: Enumeration 
 Sections:
 * [GPU Enumeration: Compiling](#enum-gpu-compile)
-* [GPU Enumeration: Batch Script submission](#enum-gpu-batch-submit)
+* [GPU Enumeration: Batch Script Submission](#enum-gpu-batch-submit)
 * [GPU Enumeration: Batch Job Output](#enum-gpu-batch-output )
 
 <hr>
@@ -1507,7 +1507,7 @@ Max grid dimensions: (2147483647, 65535, 65535)
 ### <a name="mat-mul-gpu"></a>GPU/CUDA Example: Mattrix-Multiplication
 Sections:
 * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
-* [Matrix Mult. (GPU): Batch Script submission](#mat-mul-gpu-batch-submit)
+* [Matrix Mult. (GPU): Batch Script Submission](#mat-mul-gpu-batch-submit)
 * [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output )
 
 ### <a name="mat-mul-gpu"></a>CUDA Example: Matrix-Multiplication
