@@ -26,6 +26,9 @@ Requirements:
     * [Obtaining Example Code](#example-code)
     
 * [Modules: Managing User Environments](#modules)
+    * [Common module commands](#module-commands)
+    * [Load and Check Modules and Environment](#load-and-check-module-env)
+    * [Using Scripts to Load Module Environments](#module-load-scripts)
 
 * [Compiling & Linking](#compilers)
     * [Supported Compiler Types](#compilers-supported)
@@ -159,22 +162,22 @@ Kickstarted 17:27 08-Feb-2016
 ### <a name="example-code"></a>Obtaining Example Code
 * Create a test directory hold the comet example files:
 ```
-[mthomas@comet-ln2 ~]$ mkdir comet-examples
-[mthomas@comet-ln2 ~]$ ls -al
+[comet-ln2 ~]$ mkdir comet-examples
+[comet-ln2 ~]$ ls -al
 total 166
-drwxr-x---   8 mthomas use300    24 Jul 17 20:20 .
+drwxr-x---   8 user user300    24 Jul 17 20:20 .
 drwxr-xr-x 139 root    root       0 Jul 17 20:17 ..
--rw-r--r--   1 mthomas use300  2487 Jun 23  2017 .alias
--rw-------   1 mthomas use300 14247 Jul 17 12:11 .bash_history
--rw-r--r--   1 mthomas use300    18 Jun 19  2017 .bash_logout
--rw-r--r--   1 mthomas use300   176 Jun 19  2017 .bash_profile
--rw-r--r--   1 mthomas use300   159 Jul 17 18:24 .bashrc
-drwxr-xr-x   2 mthomas use300     2 Jul 17 20:20 comet-examples
+-rw-r--r--   1 user use300  2487 Jun 23  2017 .alias
+-rw-------   1 user use300 14247 Jul 17 12:11 .bash_history
+-rw-r--r--   1 user use300    18 Jun 19  2017 .bash_logout
+-rw-r--r--   1 user use300   176 Jun 19  2017 .bash_profile
+-rw-r--r--   1 user use300   159 Jul 17 18:24 .bashrc
+drwxr-xr-x   2 user use300     2 Jul 17 20:20 comet-examples
 [snip extra lines]
-[mthomas@comet-ln2 ~]$ cd comet-examples/
-[mthomas@comet-ln2 comet-examples]$ pwd
-/home/mthomas/comet-examples
-[mthomas@comet-ln2 comet-examples]$
+[comet-ln2 ~]$ cd comet-examples/
+[comet-ln2 comet-examples]$ pwd
+/home/user/comet-examples
+[comet-ln2 comet-examples]$
 ```
 
 * Copy the `PHYS244 directory` from the /examples directory to your 'comet-examples' directory, which is located in your home (`/home/username`) directory. Note: you should have completed the creation of this directory as part of the *Getting Started* and *Basic Skills* preparation work:
@@ -237,8 +240,9 @@ Most examples will contain source code, along with a batch script example so you
 The Environment Modules package provides for dynamic modification of your shell environment. Module commands set, change, or delete environment variables, typically in support of a particular application. They also let the user choose between different versions of the same software or different combinations of related codes. See:
 http://www.sdsc.edu/support/user_guides/comet.html#modules
 
-<b> Common module commands:</b>
-   
+### <a name="module-commands"></a>Common module commands
+
+ 
    Here are some common module commands and their descriptions:
 
 | Command | Description | 
@@ -272,6 +276,7 @@ atlas/3.10.2(default)     lapack/3.6.0(default)     scalapack/2.0.2(default)
 boost/1.55.0(default)     mxml/2.9(default)         slepc/3.6.2(default)
 . . .
 ```
+### <a name="load-and-check-module-env"></a>Load and Check Modules and Environment
 
 * Load modules:
 ```
@@ -281,7 +286,8 @@ Currently Loaded Modulefiles:
   1) intel/2013_sp1.2.144   3) gnutools/2.69
   2) mvapich2_ib/2.1        4) fftw/3.3.4
 ```
-* Show what a module does:
+
+Show loaded module details:
 ```
 $ module show fftw/3.3.4
 -------------------------------------------------------------------
@@ -330,7 +336,8 @@ PATH=/opt/gnu/gcc/bin:/opt/gnu/bin:/opt/mvapich2/intel/ib/bin:/opt/intel/compose
 [Back to Top](#top)
 <hr>
 
-<b>Using Scripts to Load Module Environments</b>
+### <a name="module-load-scripts"></a>Using Scripts to Load Module Environments
+ [Using Scripts to Load Module Environments](#module-load-scripts)
 
 Use scripts to load your module environment. This will guarantee that the current working environment is what you want, and that you are not inheriting unwanted modules/applications. In order for the commands run inside a script (child shell) to change the parent shell, you must use the <b>`source`</b> command:
 
@@ -352,7 +359,7 @@ Currently Loaded Modulefiles:
   1) gnutools/2.69   2) cuda/7.0
 [comet-ln3:~] which nvcc
 /usr/local/cuda-7.0/bin/nvcc
-[mthomas@comet-ln3:~] which mpirun
+[user@comet-ln3:~] which mpirun
 /usr/bin/which: no mpirun in (/opt/gnu/gcc/bin:usr/local/bin……..)
 ```
 
@@ -372,11 +379,22 @@ After running the script, we see that the modules no longer include and CUDA com
 [comet-ln3:~] module list
 Currently Loaded Modulefiles:
   1) gnutools/2.69  2) intel/2013_sp1.2.144 3) mvapich2_ib/2.1
-[mthomas@comet-ln3:~] which mpicc
+[comet-ln3:~] which mpicc
 /opt/mvapich2/intel/ib/bin/mpicc
-[mthomas@comet-ln3:~] which nvcc
+[comet-ln3:~] which nvcc
 /usr/bin/which: no nvcc in (/opt/gnu/gcc/bin:usr/local/bin……..)
 ```
+
+[Back to Top](#top)
+<hr>
+<b>Module Error: command not found </b>
+
+Sometimes this error is encountered when switching from one shell to another or attempting to run the module command from within a shell script or batch job. The module command may not be inherited between the shells.  To keep this from happening, execute the following command:
+```
+[comet-ln3:~]source /etc/profile.d/modules.sh
+```
+OR add this command to your shell script (including Slurm batch scripts)
+
 
 [Back to Top](#top)
 <hr>
@@ -420,7 +438,7 @@ Default/Suggested Compilers to used based on programming model and languages:
 
 ### <a name="compilers-intel"></a>Using the Intel Compilers:
 
-The Intel compilers and the MVAPICH2 MPI implementation will be loaded by default. If you have modified your environment, you can reload by executing the following commands at the Linux prompt or placing in your startup file (~/.cshrc or ~/.bashrc)
+The Intel compilers and the MVAPICH2 MPI implementation will be loaded by default. If you have modified your environment, you can reload by executing the following commands at the Linux prompt or placing in your startup file (~/.cshrc or ~/.bashrc) or into a module load script (see above).
 ```
 module purge
 module load gnutools
@@ -432,28 +450,28 @@ Intel MKL libraries are available as part of the "intel" modules on Comet. Once 
 
 In the example below, we are working with the HPC examples that can be found in 
 ```
-[mthomas@comet-14-01:~/comet-examples/PHYS244/MKL] pwd
-/home/mthomas/comet-examples/PHYS244/MKL
-[mthomas@comet-14-01:~/comet-examples/PHYS244/MKL] ls -al
+[user@comet-14-01:~/comet-examples/PHYS244/MKL] pwd
+/home/user/comet-examples/PHYS244/MKL
+[user@comet-14-01:~/comet-examples/PHYS244/MKL] ls -al
 total 25991
-drwxr-xr-x  2 mthomas use300        9 Nov 25 17:20 .
-drwxr-xr-x 16 mthomas use300       16 Aug  5 19:02 ..
--rw-r--r--  1 mthomas use300      325 Aug  5 19:02 compile.txt
--rw-r--r--  1 mthomas use300     6380 Aug  5 19:02 pdpttr.c
--rwxr-xr-x  1 mthomas use300 44825440 Nov 25 16:55 pdpttr.exe
--rw-r--r--  1 mthomas use300      188 Nov 25 16:57 scalapack.20294236.comet-07-27.out
--rw-r--r--  1 mthomas use300      376 Aug  5 19:02 scalapack.sb
+drwxr-xr-x  2 user use300        9 Nov 25 17:20 .
+drwxr-xr-x 16 user use300       16 Aug  5 19:02 ..
+-rw-r--r--  1 user use300      325 Aug  5 19:02 compile.txt
+-rw-r--r--  1 user use300     6380 Aug  5 19:02 pdpttr.c
+-rwxr-xr-x  1 user use300 44825440 Nov 25 16:55 pdpttr.exe
+-rw-r--r--  1 user use300      188 Nov 25 16:57 scalapack.20294236.comet-07-27.out
+-rw-r--r--  1 user use300      376 Aug  5 19:02 scalapack.sb
 ```
 
 The file `compile.txt` contains the full command to compile the `pdpttr.c` program statically linking 64 bit scalapack libraries on Comet:
 ```
-[mthomas@comet-14-01:~/comet-examples/PHYS244/MKL] cat compile.txt 
+[user@comet-14-01:~/comet-examples/PHYS244/MKL] cat compile.txt 
 mpicc -o pdpttr.exe pdpttr.c  -I$MKL_ROOT/include ${MKL_ROOT}/lib/intel64/libmkl_scalapack_lp64.a -Wl,--start-group ${MKL_ROOT}/lib/intel64/libmkl_intel_lp64.a ${MKL_ROOT}/lib/intel64/libmkl_core.a ${MKL_ROOT}/lib/intel64/libmkl_sequential.a -Wl,--end-group ${MKL_ROOT}/lib/intel64/libmkl_blacs_intelmpi_lp64.a -lpthread -lm```
 ```
 
 Run the command:
 ```
-[mthomas@comet-14-01:~/comet-examples/PHYS244/MKL] mpicc -o pdpttr.exe pdpttr.c  -I$MKL_ROOT/include ${MKL_ROOT}/lib/intel64/libmkl_scalapack_lp64.a -Wl,--start-group ${MKL_ROOT}/lib/intel64/libmkl_intel_lp64.a ${MKL_ROOT}/lib/intel64/libmkl_core.a ${MKL_ROOT}/lib/intel64/libmkl_sequential.a -Wl,--end-group ${MKL_ROOT}/lib/intel64/libmkl_blacs_intelmpi_lp64.a -lpthread -lm
+[user@comet-14-01:~/comet-examples/PHYS244/MKL] mpicc -o pdpttr.exe pdpttr.c  -I$MKL_ROOT/include ${MKL_ROOT}/lib/intel64/libmkl_scalapack_lp64.a -Wl,--start-group ${MKL_ROOT}/lib/intel64/libmkl_intel_lp64.a ${MKL_ROOT}/lib/intel64/libmkl_core.a ${MKL_ROOT}/lib/intel64/libmkl_sequential.a -Wl,--end-group ${MKL_ROOT}/lib/intel64/libmkl_blacs_intelmpi_lp64.a -lpthread -lm
 ```
 For more information on the Intel compilers run: [ifort | icc | icpc] -help
 
@@ -1190,20 +1208,20 @@ Hello from thread 3 out of 6 from process 5 out of 8 on comet-01-04.sdsc.edu
     
 * Change to the CUDA example directory:
 ```
-[mthomas@comet-ln2/comet-examples/PHYS244]$ cd /home/mthomas/comet-examples/PHYS244/CUDA
-[mthomas@comet-ln2 CUDA]$ ls -al
+[user@comet-ln2/comet-examples/PHYS244]$ cd /home/user/comet-examples/PHYS244/CUDA
+[user@comet-ln2 CUDA]$ ls -al
 total 427
-drwxr-xr-x  2 mthomas use300     11 Aug  5 19:02 .
-drwxr-xr-x 16 mthomas use300     16 Aug  5 19:02 ..
--rw-r--r--  1 mthomas use300    446 Aug  5 19:02 CUDA.8718375.comet-30-08.out
--rw-r--r--  1 mthomas use300    253 Aug  5 19:02 cuda.sb
--rw-r--r--  1 mthomas use300   5106 Aug  5 19:02 exception.h
--rw-r--r--  1 mthomas use300   1168 Aug  5 19:02 helper_functions.h
--rw-r--r--  1 mthomas use300  29011 Aug  5 19:02 helper_image.h
--rw-r--r--  1 mthomas use300  23960 Aug  5 19:02 helper_string.h
--rw-r--r--  1 mthomas use300  15414 Aug  5 19:02 helper_timer.h
--rwxr-xr-x  1 mthomas use300 533168 Aug  5 19:02 matmul
--rw-r--r--  1 mthomas use300  13482 Aug  5 19:02 matrixMul.cu
+drwxr-xr-x  2 user user300     11 Aug  5 19:02 .
+drwxr-xr-x 16 user user300     16 Aug  5 19:02 ..
+-rw-r--r--  1 user user300    446 Aug  5 19:02 CUDA.8718375.comet-30-08.out
+-rw-r--r--  1 user user300    253 Aug  5 19:02 cuda.sb
+-rw-r--r--  1 user user300   5106 Aug  5 19:02 exception.h
+-rw-r--r--  1 user user300   1168 Aug  5 19:02 helper_functions.h
+-rw-r--r--  1 user user300  29011 Aug  5 19:02 helper_image.h
+-rw-r--r--  1 user user300  23960 Aug  5 19:02 helper_string.h
+-rw-r--r--  1 user user300  15414 Aug  5 19:02 helper_timer.h
+-rwxr-xr-x  1 user user300 533168 Aug  5 19:02 matmul
+-rw-r--r--  1 user user300  13482 Aug  5 19:02 matrixMul.cu
 ```
 
 
@@ -1213,35 +1231,35 @@ drwxr-xr-x 16 mthomas use300     16 Aug  5 19:02 ..
 ### <a name="mat-mul-gpu-compile"></a>Compiling CUDA Example (GPU)
 * Load the CUDA module:
 ```
-[mthomas@comet-ln2 CUDA]$ module list
+[user@comet-ln2 CUDA]$ module list
 Currently Loaded Modulefiles:
   1) intel/2013_sp1.2.144   2) mvapich2_ib/2.1        3) gnutools/2.69
-[mthomas@comet-ln2 CUDA]$
-[mthomas@comet-ln2 CUDA]$ module load cuda
-[mthomas@comet-ln2 CUDA]$ module list
+[user@comet-ln2 CUDA]$
+[user@comet-ln2 CUDA]$ module load cuda
+[user@comet-ln2 CUDA]$ module list
 Currently Loaded Modulefiles:
   1) intel/2013_sp1.2.144   2) mvapich2_ib/2.1        3) gnutools/2.69          4) cuda/7.0
-[mthomas@comet-ln2 CUDA]$
+[user@comet-ln2 CUDA]$
 ```
 
 * Compile the code:
 ```
-[mthomas@comet-ln2 CUDA]$ nvcc -o matmul -I.  matrixMul.cu
-[mthomas@comet-ln2 CUDA]$ ll
+[user@comet-ln2 CUDA]$ nvcc -o matmul -I.  matrixMul.cu
+[user@comet-ln2 CUDA]$ ll
 total 172
-drwxr-xr-x  2 mthomas use300     13 Aug  6 00:53 .
-drwxr-xr-x 16 mthomas use300     16 Aug  5 19:02 ..
--rw-r--r--  1 mthomas use300    458 Aug  6 00:35 CUDA.18347152.comet-33-02.out
--rw-r--r--  1 mthomas use300    458 Aug  6 00:37 CUDA.18347157.comet-33-02.out
--rw-r--r--  1 mthomas use300    446 Aug  5 19:02 CUDA.8718375.comet-30-08.out
--rw-r--r--  1 mthomas use300    253 Aug  5 19:02 cuda.sb
--rw-r--r--  1 mthomas use300   5106 Aug  5 19:02 exception.h
--rw-r--r--  1 mthomas use300   1168 Aug  5 19:02 helper_functions.h
--rw-r--r--  1 mthomas use300  29011 Aug  5 19:02 helper_image.h
--rw-r--r--  1 mthomas use300  23960 Aug  5 19:02 helper_string.h
--rw-r--r--  1 mthomas use300  15414 Aug  5 19:02 helper_timer.h
--rwxr-xr-x  1 mthomas use300 533168 Aug  6 00:53 matmul
--rw-r--r--  1 mthomas use300  13482 Aug  6 00:50 matrixMul.cu
+drwxr-xr-x  2 user user300     13 Aug  6 00:53 .
+drwxr-xr-x 16 user user300     16 Aug  5 19:02 ..
+-rw-r--r--  1 user user300    458 Aug  6 00:35 CUDA.18347152.comet-33-02.out
+-rw-r--r--  1 user user300    458 Aug  6 00:37 CUDA.18347157.comet-33-02.out
+-rw-r--r--  1 user user300    446 Aug  5 19:02 CUDA.8718375.comet-30-08.out
+-rw-r--r--  1 user user300    253 Aug  5 19:02 cuda.sb
+-rw-r--r--  1 user user300   5106 Aug  5 19:02 exception.h
+-rw-r--r--  1 user user300   1168 Aug  5 19:02 helper_functions.h
+-rw-r--r--  1 user user300  29011 Aug  5 19:02 helper_image.h
+-rw-r--r--  1 user user300  23960 Aug  5 19:02 helper_string.h
+-rw-r--r--  1 user user300  15414 Aug  5 19:02 helper_timer.h
+-rwxr-xr-x  1 user user300 533168 Aug  6 00:53 matmul
+-rw-r--r--  1 user user300  13482 Aug  6 00:50 matrixMul.cu
  ```
 
 [Back to Top](#top)
@@ -1251,7 +1269,7 @@ drwxr-xr-x 16 mthomas use300     16 Aug  5 19:02 ..
 
 * Contents of the slurm script:
 ```
-[mthomas@comet-ln2 CUDA]$ cat cuda.sb
+[user@comet-ln2 CUDA]$ cat cuda.sb
 #!/bin/bash
 #SBATCH --job-name="CUDA"
 #SBATCH --output="CUDA.%j.%N.out"
@@ -1269,7 +1287,7 @@ module load cuda
 ```
 * Submit the job:
 ```
-[mthomas@comet-ln2 CUDA]$ sbatch cuda.sb
+[user@comet-ln2 CUDA]$ sbatch cuda.sb
 Submitted batch job 18347288
 ```
 
@@ -1279,7 +1297,7 @@ Submitted batch job 18347288
 #### <a name="mat-mul-gpu-batch-output"></a>Hello World (GPU): Output
 
 ```
-[mthomas@comet-ln2 CUDA]$ cat CUDA.18347288.comet-33-01.out
+[user@comet-ln2 CUDA]$ cat CUDA.18347288.comet-33-01.out
 [Matrix Multiply Using CUDA] - Starting...
 [Matrix Multiply Using CUDA] - Welcome SI18 Attendees...
 
@@ -1296,10 +1314,10 @@ NOTE: The CUDA Samples are not meant for performance measurements. Results may v
 ```
 * monitor the job:
 ```
-squeue -u mthomas
+squeue -u user 
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-          18347288 gpu-share     CUDA  mthomas PD       0:00      1 (None)
-[mthomas@comet-ln2 CUDA]$
+          18347288 gpu-share     CUDA  user PD       0:00      1 (None)
+[user@comet-ln2 CUDA]$
 ```
 
 
