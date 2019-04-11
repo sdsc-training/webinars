@@ -1286,22 +1286,51 @@ GPUs will be allocated on a first available, first schedule basis, unless specif
 #SBATCH --gres=gpu:1         # define type of GPU
 #SBATCH -t 00:10:00
 
-#Load the cuda module
-module load cuda
-
-#Run the job
-./gpu_enum
-
 ```
 
 <b>Submit the job </b>
+To run the job, type the batch script submission command:
+[comet-ln2:~/cuda/gpu_enum] sbatch gpu_enum.sb 
+Submitted batch job 22527745
+[comet-ln2:~/cuda/gpu_enum] 
 
 <b>Monitor the job </b>
+Monitor the job until it is finished
+```
+[user@comet-ln2:~/cuda/gpu_enum] sbatch gpu_enum.sb
+Submitted batch job 22527745
+[user@comet-ln2:~/cuda/gpu_enum] squeue -u mthomas
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          22527745 gpu-share gpu_enum  mthomas PD       0:00      1 (None)
 
-<hr>
+```
 
 ### <a name="enum-gpu-gpu"></a>GPU Enumeration: Batch Job Output 
+Output from script is for one device, which is what was specified in script.
 
+```
+[user@comet-ln2:~/cuda/gpu_enum] cat gpu_enum.22527745.comet-31-10.out
+ --- Obtaining General Information for CUDA devices  ---
+ --- General Information for device 0 ---
+Name: Tesla K80
+Compute capability: 3.7
+Clock rate: 823500
+Device copy overlap: Enabled
+Kernel execution timeout : Disabled
+ --- Memory Information for device 0 ---
+Total global mem: 11996954624
+Total constant Mem: 65536
+Max mem pitch: 2147483647
+Texture Alignment: 512
+ --- MP Information for device 0 ---
+Multiprocessor count: 13
+Shared mem per mp: 49152
+Registers per mp: 65536
+Threads in warp: 32
+Max threads per block: 1024
+Max thread dimensions: (1024, 1024, 64)
+Max grid dimensions: (2147483647, 65535, 65535)
+```
 
 [Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
