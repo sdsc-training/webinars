@@ -343,7 +343,7 @@ module load gnutools
 module load cuda
 ```
 
-Next, we source this scripts, and check out the module environment:
+Next, we  <b>`source`</b> this script, and check out the module environment. Note that the environment no longer includes <b>`mpirun`</b>, but does include the NVIDIA compiler command <b>`nvcc`</b>.
 ```
 [comet-ln3:~] source ./loadgpuenv.sh
 [comet-ln3:~] module list 
@@ -353,6 +353,25 @@ Currently Loaded Modulefiles:
 /usr/local/cuda-7.0/bin/nvcc
 [mthomas@comet-ln3:~] which mpirun
 /usr/bin/which: no mpirun in (/opt/gnu/gcc/bin:usr/local/bin……..)
+```
+Next, we want to change the module environment so we can do MPI work. For this we need to clear out the GPU/CUDA environment and load in the INTEL compilers. The script for this is shown below:
+```
+[comet-ln3:~] cat loadintelenv.sh 
+module purge
+module load gnutools
+module load intel mvapich2_ib
+```
+
+After running the script, we see that the modules no longer include and CUDA:
+```
+[comet-ln3:~] source loadintelenv.sh 
+[comet-ln3:~] module list
+Currently Loaded Modulefiles:
+  1) gnutools/2.69  2) intel/2013_sp1.2.144 3) mvapich2_ib/2.1
+[mthomas@comet-ln3:~] which mpirun
+/opt/mvapich2/intel/ib/bin/mpirun
+[mthomas@comet-ln3:~] which nvcc
+/usr/bin/which: no nvcc in (/opt/gnu/gcc/bin:usr/local/bin……..)
 ```
 
 [Back to Top](#top)
