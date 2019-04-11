@@ -1336,19 +1336,25 @@ echo "calling simple hello"
 
 
 <b>Monitor the job Monitor the job until it is finished</b>
+```
+[user@comet-ln2:~/cuda/simple_hello] squeue -u user
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          22532827 gpu-share simple_h  user PD       0:00      1 (Resources)
+[user@comet-ln2:~/cuda/simple_hello] 
 
+```
 
 
 <hr>
 
 #### <a name="hello-world-gpu-batch-output"></a>GPU Hello World: Batch Job Output
 ```
-[mthomas@comet-ln2:~/cuda/simple_hello] cat simple_hello.22532827.comet-33-06.out 
+[user@comet-ln2:~/cuda/simple_hello] cat simple_hello.22532827.comet-33-06.out 
 loading cuda module
 
 Hello, Physics 244 Class! You have 2 devices
 
-[mthomas@comet-ln2:~/cuda/simple_hello]
+[user@comet-ln2:~/cuda/simple_hello]
 
 ```
 <hr>
