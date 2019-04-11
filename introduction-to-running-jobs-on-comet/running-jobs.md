@@ -1271,6 +1271,27 @@ GPUs will be allocated on a first available, first schedule basis, unless specif
 #SBATCH --gres=gpu:k80:4 #only k80 nodes 
 #SBATCH --gres=gpu:p100:4 #only p100 nodes
 ```
+
+SLURM batch script contents:
+
+```[comet-ln2: ~/cuda/gpu_enum] cat gpu_enum.sb 
+#!/bin/bash
+#SBATCH --job-name="gpu_enum"
+#SBATCH --output="gpu_enum.%j.%N.out"
+#SBATCH --partition=gpu-shared          # define GPU partition
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=6
+#SBATCH --gres=gpu:1         # define type of GPU
+#SBATCH -t 00:10:00
+
+#Load the cuda module
+module load cuda
+
+#Run the job
+./gpu_enum
+
+```
+
 <b>Submit the job </b>
 
 <b>Monitor the job </b>
