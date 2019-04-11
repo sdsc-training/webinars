@@ -1228,7 +1228,6 @@ Currently Loaded Modulefiles:
 /usr/local/cuda-7.0/bin/nvcc
 ```
 
-[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
 <hr>
 
@@ -1268,17 +1267,19 @@ gpu enumeration code here
 <b>=============================================================</b>
 <b>=============================================================</b>
 <b>=============================================================</b>
+
 <b>THE MATERIAL BELOW HAS NOT BEEN MIGRATED</b>
+
 <b>=============================================================</b>
 <b>=============================================================</b>
 <b>=============================================================</b>
 <b>=============================================================</b>
 <hr>
 [Back to Top](#top)
-[Back to Top](#top)
 
-###<a name="mat-mul-gpu"></a>CUDA Mat-Mult](
-* Change to the CUDA Matrix-Multiplication example directory:
+
+### <a name="mat-mul-gpu"></a>CUDA Mat-Mult](
+<b>Change to the CUDA Matrix-Multiplication example directory:</b>
 ```
 [user@comet-ln2/comet-examples/PHYS244]$ cd /home/user/comet-examples/PHYS244/CUDA
 [user@comet-ln2 CUDA]$ ls -al
