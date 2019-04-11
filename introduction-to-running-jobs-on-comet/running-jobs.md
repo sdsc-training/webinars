@@ -1242,7 +1242,28 @@ gpu hello world code here
 
 ### <a name="enum-gpu"></a>GPU/CUDA Example: Enumeration 
 * [GPU Enumeration ](#enum-gpu)
-gpu enumeration code here
+Sections:
+* [GPU Enumeration: Compiling](#enum-gpu-compile)
+* [GPU Enumeration: Batch Script submission](#enum-gpu-batch-submit)
+* [GPU Enumeration: Batch Job Output](#enum-gpu-batch-output )
+
+<hr>
+
+### <a name="enum-gpu-gpu"></a>GPU Enumeration: Compiling
+
+<hr>
+
+### <a name="enum-gpu-gpu"></a>GPU Enumeration: Batch Script Submission
+<b>Contents of the Slurm script </b>
+
+<b>Submit the job </b>
+
+<b>Monitor the job </b>
+
+<hr>
+
+### <a name="enum-gpu-gpu"></a>GPU Enumeration: Batch Job Output 
+
 
 [Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
@@ -1250,9 +1271,9 @@ gpu enumeration code here
 
 ### <a name="mat-mul-gpu"></a>GPU/CUDA Example: Mattrix-Multiplication
 Sections:
-    * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
-    * [Matrix Mult. (GPU): Batch Script submission](#mat-mul-gpu-batch-submit)
-    * [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output )
+* [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
+* [Matrix Mult. (GPU): Batch Script submission](#mat-mul-gpu-batch-submit)
+* [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output )
 
 ### <a name="mat-mul-gpu"></a>CUDA Example: Matrix-Multiplication
 <b>Change to the CUDA Matrix-Multiplication example directory:</b>
@@ -1355,7 +1376,7 @@ NOTE: The CUDA Samples are not meant for performance measurements. Results may v
 
 ```
 
-[Back to GPU/CUDA Jobs]<br>
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
 <hr>
 
