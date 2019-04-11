@@ -1238,7 +1238,11 @@ Currently Loaded Modulefiles:
 <hr>
 
 ### <a name="hello-world-gpu"></a>GPU/CUDA Example: Hello World
-* [Hello World (GPU) ](#hello-world-gpu)
+<b>Sections:</b>
+* [Hello World (GPU) ](#hello-world-gpu-compile)
+* [Hello World (GPU) ](#hello-world-gpu-batch-submit)
+* [Hello World (GPU) ](#hello-world-gpu-batch-output)
+
 Simple hello runs a cuda command to get the device count
 on the node that job is assigned to:
 ```
