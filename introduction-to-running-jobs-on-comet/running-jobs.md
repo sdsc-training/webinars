@@ -1244,6 +1244,27 @@ Currently Loaded Modulefiles:
 * [GPU Hello World: Batch Job Output](#hello-world-gpu-batch-output)
 
 ### <a name="hello-world-gpu-compile"></a>GPU Hello World: Compiling
+Simple hello runs a cuda command to get the device count
+on the node that job is assigned to:
+```
+[comet-ln2:~/cuda/simple_hello] cat simple_hello.cu 
+  1 /*
+  2 * simple_hello.cu
+  3 * Copyright 1993-2010 NVIDIA Corporation. 
+  4 *    All right reserved
+  5 */
+  6 #include <stdio.h>
+  7 #include <stdlib.h>
+  8 int main( void )
+  9 {
+ 10    int deviceCount;
+ 11    cudaGetDeviceCount( &deviceCount );
+ 12    printf("Hello, Physics 244 Class! You have %d devices\n", deviceCount );
+ 13    return 0;
+ 14 }
+[comet-ln2:~/cuda/simple_hello] 
+```
+
 Check your environment and use the CUDA <b>`nvcc`</b> command:
 ```
 [comet-ln2:~/cuda/gpu_enum] module purge
@@ -1252,41 +1273,21 @@ Check your environment and use the CUDA <b>`nvcc`</b> command:
 [comet-ln2:~/cuda/gpu_enum] module load cuda
 [comet-ln2:~/cuda/gpu_enum] which nvcc
 /usr/local/cuda-7.0/bin/nvcc
-[comet-ln2:~/cuda/simple_hello] nvcc -o simple_hello -I.  gpu_enum.cu
+[comet-ln2:~/cuda/simple_hello] nvcc -o simple_hello simple_hello.cu
 [comet-ln2:~/cuda/simple_hello] ll simple_hello 
 -rwxr-xr-x 1 mthomas use300 517437 Apr 10 19:35 simple_hello
 -rw-r--r-- 1 mthomas use300    304 Apr 10 19:35 simple_hello.cu
-[comet-ln2:~/cuda/gpu_enum] 
-```
-Simple hello runs a cuda command to get the device count
-on the node that job is assigned to:
-```
-[mthomas@comet-ln2:~/cuda/simple_hello] cat simple_hello.cu 
-/*
-* simple_hello.cu
-* Copyright 1993-2010 NVIDIA Corporation. 
-*    All right reserved
-*/
-#include <stdio.h> 
-#include <stdlib.h>
-int main( void ) 
-{ 
-   int deviceCount;
-   cudaGetDeviceCount( &deviceCount ); 
-   printf("Hello, Physics 244 Class! You have %d devices\n", deviceCount ); 
-   return 0;
-}
-[mthomas@comet-ln2:~/cuda/simple_hello] 
-```
+[comet-ln2:~/cuda/simple_hello] 
 
+```
 
 ### <a name="hello-world-gpu-batch-submit"></a>GPU Hello World: Batch Script Submit
-* [GPU Hello World: Batch Script Submission](#hello-world-gpu-batch-submit)
+batch script submission info here
 
 <hr>
 
-### <a name="hello-world-gpu-batch-submit"></a>GPU Hello World: Batch Job Output
-* [GPU Hello World: Batch Job Output](#hello-world-gpu-batch-output)
+### <a name="hello-world-gpu-batch-output"></a>GPU Hello World: Batch Job Output
+batch job output here
 
 <hr>
 
