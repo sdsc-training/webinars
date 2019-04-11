@@ -1300,20 +1300,7 @@ Sections:
 <hr>
 
 ### <a name="enum-gpu"></a>GPU Enumeration: Compiling
-Check your environment and use the CUDA <b>`nvcc`</b> command:
-```
-[comet-ln2:~/cuda/gpu_enum] module purge
-[comet-ln2:~/cuda/gpu_enum] which nvcc
-/usr/bin/which: no nvcc in (/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/opt/ibutils/bin:/usr/java/latest/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/home/user/bin)
-[comet-ln2:~/cuda/gpu_enum] module load cuda
-[comet-ln2:~/cuda/gpu_enum] which nvcc
-/usr/local/cuda-7.0/bin/nvcc
-[comet-ln2:~/cuda/gpu_enum] nvcc -o gpu_enum -I.  gpu_enum.cu
-[comet-ln2:~/cuda/gpu_enum] ll gpu_enum 
--rwxr-xr-x 1 mthomas use300 517632 Apr 10 18:39 gpu_enum
-[comet-ln2:~/cuda/gpu_enum] 
-```
-<b>GPU Enumeration Code:</a>
+<b>GPU Enumeration Code:</b>
 This code accesses the cudaDeviceProp object and returns information about the devices on the node. The list below is only some of the information that you can look for. The property values can be used to dynamically allocate or distribute your compute threads accross the GPU hardware in response to the GPU type. 
 ```
 [mthomas@comet-ln2:~/cuda/gpu_enum] cat gpu_enum.cu 
@@ -1363,6 +1350,19 @@ int main( void ) {
 }
 ```
 
+Check your environment and use the CUDA <b>`nvcc`</b> command:
+```
+[comet-ln2:~/cuda/gpu_enum] module purge
+[comet-ln2:~/cuda/gpu_enum] which nvcc
+/usr/bin/which: no nvcc in (/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/opt/ibutils/bin:/usr/java/latest/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/home/user/bin)
+[comet-ln2:~/cuda/gpu_enum] module load cuda
+[comet-ln2:~/cuda/gpu_enum] which nvcc
+/usr/local/cuda-7.0/bin/nvcc
+[comet-ln2:~/cuda/gpu_enum] nvcc -o gpu_enum -I.  gpu_enum.cu
+[comet-ln2:~/cuda/gpu_enum] ll gpu_enum 
+-rwxr-xr-x 1 mthomas use300 517632 Apr 10 18:39 gpu_enum
+[comet-ln2:~/cuda/gpu_enum] 
+```
 <hr>
 
 ### <a name="enum-gpu"></a>GPU Enumeration: Batch Script Submission
