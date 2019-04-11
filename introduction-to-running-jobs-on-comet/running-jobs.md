@@ -1331,16 +1331,23 @@ echo "calling simple hello"
 
 [user@comet-ln2:~/cuda/simple_hello]
 ```
+
+<b>Submit the job To run the job, type the batch script submission command:</b>
+
+
+<b>Monitor the job Monitor the job until it is finished</b>
+
+
+
 <hr>
 
 #### <a name="hello-world-gpu-batch-output"></a>GPU Hello World: Batch Job Output
 ```
 [mthomas@comet-ln2:~/cuda/simple_hello] cat simple_hello.22532827.comet-33-06.out 
 loading cuda module
-calling nvcc-smi
-/var/spool/slurmd/job22532827/slurm_script: line 17: nvcc-smi: command not found
-calling simple hello
+
 Hello, Physics 244 Class! You have 2 devices
+
 [mthomas@comet-ln2:~/cuda/simple_hello]
 
 ```
