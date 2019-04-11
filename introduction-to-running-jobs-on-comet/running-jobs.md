@@ -1249,6 +1249,68 @@ Sections:
 <hr>
 
 ### <a name="enum-gpu-gpu"></a>GPU Enumeration: Compiling
+Check your environment and use the CUDA <b>`nvcc`</b> command:
+```
+[comet-ln2:~/cuda/gpu_enum] module purge
+[comet-ln2:~/cuda/gpu_enum] which nvcc
+/usr/bin/which: no nvcc in (/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/opt/ibutils/bin:/usr/java/latest/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/home/user/bin)
+[comet-ln2:~/cuda/gpu_enum] module load cuda
+[comet-ln2:~/cuda/gpu_enum] which nvcc
+/usr/local/cuda-7.0/bin/nvcc
+[comet-ln2:~/cuda/gpu_enum] nvcc -o gpu_enum -I.  gpu_enum.cu
+[comet-ln2:~/cuda/gpu_enum] ll gpu_enum 
+-rwxr-xr-x 1 mthomas use300 517632 Apr 10 18:39 gpu_enum
+[comet-ln2:~/cuda/gpu_enum] 
+```
+<b>GPU Enumeration Code:</a>
+This code accesses the cudaDeviceProp object and returns information about the devices on the node. The list below is only some of the information that you can look for. The property values can be used to dynamically allocate or distribute your compute threads accross the GPU hardware in response to the GPU type. 
+```
+[mthomas@comet-ln2:~/cuda/gpu_enum] cat gpu_enum.cu 
+#include <stdio.h>
+
+int main( void ) {
+   cudaDeviceProp prop;
+   int count;
+   printf( " --- Obtaining General Information for CUDA devices  ---\n" ); 
+   cudaGetDeviceCount( &count ) ;
+   for (int i=0; i< count; i++) {
+      cudaGetDeviceProperties( &prop, i ) ;
+      printf( " --- General Information for device %d ---\n", i ); 
+      printf( "Name: %s\n", prop.name );
+   
+      printf( "Compute capability: %d.%d\n", prop.major, prop.minor ); 
+      printf( "Clock rate: %d\n", prop.clockRate );
+      printf( "Device copy overlap: " );
+   
+      if (prop.deviceOverlap)
+       printf( "Enabled\n" ); 
+      else
+       printf( "Disabled\n");
+     
+      printf( "Kernel execution timeout : " ); 
+
+      if (prop.kernelExecTimeoutEnabled)
+         printf( "Enabled\n" ); 
+      else
+         printf( "Disabled\n" );
+
+      printf( " --- Memory Information for device %d ---\n", i ); 
+      printf( "Total global mem: %ld\n", prop.totalGlobalMem ); 
+      printf( "Total constant Mem: %ld\n", prop.totalConstMem ); 
+      printf( "Max mem pitch: %ld\n", prop.memPitch );
+      printf( "Texture Alignment: %ld\n", prop.textureAlignment ); 
+      printf( " --- MP Information for device %d ---\n", i ); 
+      printf( "Multiprocessor count: %d\n", prop.multiProcessorCount );
+      printf( "Shared mem per mp: %ld\n", prop.sharedMemPerBlock ); 
+      printf( "Registers per mp: %d\n", prop.regsPerBlock ); 
+      printf( "Threads in warp: %d\n", prop.warpSize );
+      printf( "Max threads per block: %d\n", prop.maxThreadsPerBlock );
+      printf( "Max thread dimensions: (%d, %d, %d)\n", prop.maxThreadsDim[0], prop.maxThreadsDim[1], prop.maxThreadsDim[2] );
+      printf( "Max grid dimensions: (%d, %d, %d)\n", prop.maxGridSize[0], prop.maxGridSize[1], prop.maxGridSize[2] ); 
+      printf( "\n" );
+   } 
+}
+```
 
 <hr>
 
@@ -1290,10 +1352,11 @@ GPUs will be allocated on a first available, first schedule basis, unless specif
 
 <b>Submit the job </b>
 To run the job, type the batch script submission command:
+```
 [comet-ln2:~/cuda/gpu_enum] sbatch gpu_enum.sb 
 Submitted batch job 22527745
 [comet-ln2:~/cuda/gpu_enum] 
-
+```
 <b>Monitor the job </b>
 Monitor the job until it is finished
 ```
