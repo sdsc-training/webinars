@@ -1297,6 +1297,7 @@ drwxr-xr-x 16 user user300     16 Aug  5 19:02 ..
  ```
 
 <hr>
+
 ### <a name="mat-mul-gpu-batch-submit"></a>Matrix Mult. (GPU): Batch Script Submission
 
 <b>Contents of the slurm script:</b>
@@ -1321,6 +1322,8 @@ module load cuda
 ```
 [user@comet-ln2 CUDA]$ sbatch cuda.sb
 Submitted batch job 18347288
+[user@comet-ln2 CUDA]$
+
 ```
 <b>Monitor the job:</b>
 ```
@@ -1332,6 +1335,7 @@ Submitted batch job 18347288
 
 
 <hr>
+
 ### <a name="mat-mul-gpu-batch-output"></a>Matrix Mult. (GPU): Batch Job Output
 
 ```
