@@ -1229,27 +1229,30 @@ Currently Loaded Modulefiles:
 /usr/local/cuda-7.0/bin/nvcc
 ```
 
-[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs)
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
 <hr>
 
-###<a name="hello-world-gpu"></a>GPU Hello World
+### <a name="hello-world-gpu"></a>GPU Hello World
 * [Hello World (GPU) ](#hello-world-gpu)
 gpu hello world code here
 
-[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs)
+B <a name="helloworld-omp-compile"></a>Hello World (OpenMP): Compiling
+A [Hello World (OpenMP): Compiling](#helloworld-omp-compile)
+
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
 <hr>
 
-###<a name="enum-gpu"></a>GPU Enumeration 
+### <a name="enum-gpu"></a>GPU Enumeration 
 * [GPU Enumeration ](#enum-gpu)
 gpu enumeration code here
 
-[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs)
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
 <hr>
 
-###<a name="gpu-hello-world"></a>GPU Hello World
+### <a name="gpu-hello-world"></a>GPU Hello World
 * [CUDA Mat-Mult](#mat-mul-gpu)
     * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
     * [Matrix Mult. (GPU): Batch Script submission](#mat-mul-gpu-batch-submit)
