@@ -1231,18 +1231,16 @@ Currently Loaded Modulefiles:
 [Back to Top](#top)
 <hr>
 
-### <a name="hello-world-gpu"></a>GPU Hello World
+### <a name="hello-world-gpu"></a>GPU/CUDA Example: Hello World
 * [Hello World (GPU) ](#hello-world-gpu)
 gpu hello world code here
 
-B <a name="helloworld-omp-compile"></a>Hello World (OpenMP): Compiling
-A [Hello World (OpenMP): Compiling](#helloworld-omp-compile)
 
 [Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
 <hr>
 
-### <a name="enum-gpu"></a>GPU Enumeration 
+### <a name="enum-gpu"></a>GPU/CUDA Example: Enumeration 
 * [GPU Enumeration ](#enum-gpu)
 gpu enumeration code here
 
@@ -1250,35 +1248,13 @@ gpu enumeration code here
 [Back to Top](#top)
 <hr>
 
-### <a name="gpu-hello-world"></a>GPU Hello World
-* [CUDA Mat-Mult](#mat-mul-gpu)
+### <a name="mat-mul-gpu"></a>GPU/CUDA Example: Mattrix-Multiplication
+Sections:
     * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
     * [Matrix Mult. (GPU): Batch Script submission](#mat-mul-gpu-batch-submit)
     * [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output )
 
-
-[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
-[Back to Top](#top)
-<hr>
-
-
-<hr>
-<b>=============================================================</b>
-<b>=============================================================</b>
-<b>=============================================================</b>
-<b>=============================================================</b>
-
-<b>THE MATERIAL BELOW HAS NOT BEEN MIGRATED</b>
-
-<b>=============================================================</b>
-<b>=============================================================</b>
-<b>=============================================================</b>
-<b>=============================================================</b>
-<hr>
-[Back to Top](#top)
-
-
-### <a name="mat-mul-gpu"></a>CUDA Mat-Mult](
+### <a name="mat-mul-gpu"></a>CUDA Example: Matrix-Multiplication
 <b>Change to the CUDA Matrix-Multiplication example directory:</b>
 ```
 [user@comet-ln2/comet-examples/PHYS244]$ cd /home/user/comet-examples/PHYS244/CUDA
@@ -1300,17 +1276,7 @@ drwxr-xr-x 16 user user300     16 Aug  5 19:02 ..
 
 ### <a name="mat-mul-gpu-compile"></a>Compiling CUDA Example (GPU)
 
-[Back to Top](#top)
-<hr>
-
-      * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
-      * [Matrix Mult. (GPU): Batch Script submission](#mat-mul-gpu-batch-submit)
-      * [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output )
- 
-
-
-
-* Compile the code:
+<b> Compile the code:</b>
 ```
 [user@comet-ln2 CUDA]$ nvcc -o matmul -I.  matrixMul.cu
 [user@comet-ln2 CUDA]$ ll
@@ -1330,12 +1296,11 @@ drwxr-xr-x 16 user user300     16 Aug  5 19:02 ..
 -rw-r--r--  1 user user300  13482 Aug  6 00:50 matrixMul.cu
  ```
 
-[Back to Top](#top)
 <hr>
+### <a name="mat-mul-gpu-batch-submit"></a>Matrix Mult. (GPU): Batch Script Submission
+ [Matrix Mult. (GPU): Batch Script submission](#mat-mul-gpu-batch-submit)
 
-#### <a name="mat-mul-gpu-batch-submit"></a>Hello World (GPU): Submit
-
-* Contents of the slurm script:
+<b>Contents of the slurm script:</b>
 ```
 [user@comet-ln2 CUDA]$ cat cuda.sb
 #!/bin/bash
@@ -1353,17 +1318,22 @@ module load cuda
 #Run the job
 ./matmul
 ```
-* Submit the job:
+<b> Submit the job:</b>
 ```
 [user@comet-ln2 CUDA]$ sbatch cuda.sb
 Submitted batch job 18347288
 ```
+<b>Monitor the job:</b>
+```
+[user@comet-ln2 CUDA]$squeue -u user 
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          18347288 gpu-share     CUDA  user PD       0:00      1 (None)
+[user@comet-ln2 CUDA]$
+```
 
-[Back to Top](#top)
+
 <hr>
-
-### <a name="comp-and-run-cuda-jobs"></a>Compiling and Running GPU/CUDA Jobs
-  * [Hands-on Examples: CUDA Mat-Mult](#mat-mul-gpu)
+### <a name="mat-mul-gpu-batch-output"></a>Matrix Mult. (GPU): Batch Job Output
 
 ```
 [user@comet-ln2 CUDA]$ cat CUDA.18347288.comet-33-01.out
@@ -1381,15 +1351,9 @@ Checking computed result for correctness: Result = PASS
 NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
 
 ```
-* monitor the job:
-```
-squeue -u user 
-             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-          18347288 gpu-share     CUDA  user PD       0:00      1 (None)
-[user@comet-ln2 CUDA]$
-```
 
-
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
 <hr>
+
 
