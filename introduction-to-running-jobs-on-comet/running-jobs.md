@@ -1275,20 +1275,75 @@ Check your environment and use the CUDA <b>`nvcc`</b> command:
 /usr/local/cuda-7.0/bin/nvcc
 [comet-ln2:~/cuda/simple_hello] nvcc -o simple_hello simple_hello.cu
 [comet-ln2:~/cuda/simple_hello] ll simple_hello 
--rwxr-xr-x 1 mthomas use300 517437 Apr 10 19:35 simple_hello
--rw-r--r-- 1 mthomas use300    304 Apr 10 19:35 simple_hello.cu
+-rwxr-xr-x 1 user use300 517437 Apr 10 19:35 simple_hello
+-rw-r--r-- 1 user use300    304 Apr 10 19:35 simple_hello.cu
 [comet-ln2:~/cuda/simple_hello] 
 
 ```
 
 #### <a name="hello-world-gpu-batch-submit"></a>GPU Hello World: Batch Script Submit
-batch script submission info here
 
+GPU nodes can be accessed via either the "gpu" or the "gpu-shared" partitions:
+```
+#SBATCH -p gpu           
+```
+or
+```
+#SBATCH -p gpu-shared 
+```
+
+In addition to the partition namei (required), the type of gpui (optional) and the individual GPUs are scheduled as a resource.
+```
+#SBATCH --gres=gpu[:type]:n 
+```
+
+GPUs will be allocated on a first available, first schedule basis, unless specified with the [type] option, where type can be <b>`k80`</b> or <b>`p100`</b> Note: type is case sensitive.
+```
+#SBATCH --gres=gpu:4     #first available gpu node 
+#SBATCH --gres=gpu:k80:4 #only k80 nodes 
+#SBATCH --gres=gpu:p100:4 #only p100 nodes
+```
+
+<b>Contents of the Slurm script</b>
+```
+[user@comet-ln2:~/cuda/simple_hello] cat simple_hello.sb 
+#!/bin/bash
+#SBATCH --job-name="simple_hello"
+#SBATCH --output="simple_hello.%j.%N.out"
+#SBATCH --partition=gpu-shared          # define GPU partition
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=6
+####SBATCH --gres=gpu:1         # define type of GPU
+#SBATCH --gres=gpu:2         # first available
+#SBATCH -t 00:05:00
+
+#Load the cuda module
+echo "loading cuda module"
+module load cuda
+
+#print device information via command line
+echo "calling nvcc-smi"
+nvcc-smi
+
+#Run the job
+echo "calling simple hello"
+./simple_hello
+
+[user@comet-ln2:~/cuda/simple_hello]
+```
 <hr>
 
 #### <a name="hello-world-gpu-batch-output"></a>GPU Hello World: Batch Job Output
-batch job output here
+```
+[mthomas@comet-ln2:~/cuda/simple_hello] cat simple_hello.22532827.comet-33-06.out 
+loading cuda module
+calling nvcc-smi
+/var/spool/slurmd/job22532827/slurm_script: line 17: nvcc-smi: command not found
+calling simple hello
+Hello, Physics 244 Class! You have 2 devices
+[mthomas@comet-ln2:~/cuda/simple_hello]
 
+```
 <hr>
 
 ### <a name="enum-gpu"></a>GPU/CUDA Example: Enumeration 
@@ -1305,7 +1360,7 @@ Sections:
 <b>GPU Enumeration Code:</b>
 This code accesses the cudaDeviceProp object and returns information about the devices on the node. The list below is only some of the information that you can look for. The property values can be used to dynamically allocate or distribute your compute threads accross the GPU hardware in response to the GPU type. 
 ```
-[mthomas@comet-ln2:~/cuda/gpu_enum] cat gpu_enum.cu 
+[user@comet-ln2:~/cuda/gpu_enum] cat gpu_enum.cu 
 #include <stdio.h>
 
 int main( void ) {
@@ -1362,34 +1417,12 @@ To compile: check your environment and use the CUDA <b>`nvcc`</b> command:
 /usr/local/cuda-7.0/bin/nvcc
 [comet-ln2:~/cuda/gpu_enum] nvcc -o gpu_enum -I.  gpu_enum.cu
 [comet-ln2:~/cuda/gpu_enum] ll gpu_enum 
--rwxr-xr-x 1 mthomas use300 517632 Apr 10 18:39 gpu_enum
+-rwxr-xr-x 1 user use300 517632 Apr 10 18:39 gpu_enum
 [comet-ln2:~/cuda/gpu_enum] 
 ```
 <hr>
 
 ### <a name="enum-gpu"></a>GPU Enumeration: Batch Script Submission
-
-GPU nodes can be accessed via either the "gpu" or the "gpu-shared" partitions:
-```
-#SBATCH -p gpu           
-```
-or
-```
-#SBATCH -p gpu-shared 
-```
-
-In addition to the partition namei (required), the type of gpui (optional) and the individual GPUs are scheduled as a resource.
-```
-#SBATCH --gres=gpu[:type]:n 
-```
-
-GPUs will be allocated on a first available, first schedule basis, unless specified with the [type] option, where type can be <b>`k80`</b> or <b>`p100`</b> Note: type is case sensitive.
-```
-#SBATCH --gres=gpu:4     #first available gpu node 
-#SBATCH --gres=gpu:k80:4 #only k80 nodes 
-#SBATCH --gres=gpu:p100:4 #only p100 nodes
-```
-
 <b>Contents of the Slurm script </b>
 
 ```[comet-ln2: ~/cuda/gpu_enum] cat gpu_enum.sb 
@@ -1401,6 +1434,12 @@ GPUs will be allocated on a first available, first schedule basis, unless specif
 #SBATCH --ntasks-per-node=6
 #SBATCH --gres=gpu:1         # define type of GPU
 #SBATCH -t 00:10:00
+
+#Load the cuda module
+module load cuda
+
+#Run the job
+./gpu_enum
 
 ```
 
@@ -1416,9 +1455,9 @@ Monitor the job until it is finished
 ```
 [user@comet-ln2:~/cuda/gpu_enum] sbatch gpu_enum.sb
 Submitted batch job 22527745
-[user@comet-ln2:~/cuda/gpu_enum] squeue -u mthomas
+[user@comet-ln2:~/cuda/gpu_enum] squeue -u user
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-          22527745 gpu-share gpu_enum  mthomas PD       0:00      1 (None)
+          22527745 gpu-share gpu_enum  user PD       0:00      1 (None)
 
 ```
 
@@ -1469,7 +1508,7 @@ If we change the batch script to ask for 2 devices (see line 8):
 
 The output looks like this:
 ```
-[mthomas@comet-ln2:~/cuda/gpu_enum] cat gpu_enum.22528598.comet-33-09.out 
+[user@comet-ln2:~/cuda/gpu_enum] cat gpu_enum.22528598.comet-33-09.out 
  --- Obtaining General Information for CUDA devices  ---
  --- General Information for device 0 ---
 Name: Tesla P100-PCIE-16GB
