@@ -330,7 +330,7 @@ PATH=/opt/gnu/gcc/bin:/opt/gnu/bin:/opt/mvapich2/intel/ib/bin:/opt/intel/compose
 [Back to Top](#top)
 <hr>
 
-<em>Using Script to load modules</em>
+<b>Using Scripts to Load Module Environments</b>
 
 Use scripts to load your module environment. This will guarantee that the current working environment is what you want, and that you are not inheriting unwanted modules/applications. In order for the commands run inside a script (child shell) to change the parent shell, you must use the <b>`source`</b> command:
 
