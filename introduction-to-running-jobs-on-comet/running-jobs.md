@@ -1213,9 +1213,9 @@ Note: Comet provides both NVIDIA K80 and P100 GPU-based resources. These GPU nod
 are allocated as separate resources. Make sure you have enough allocations and that
 you are using the right account.
 
-<b> Comet GPU Hardware: </b>
+<b> Comet GPU Hardware: </b> <br>
 <a name="gpu-hardware"></a><img src="images/comet-gpu-hardware.png" alt="Comet GPU Hardware" width="500px" />
-
+ <p>
 <b>Load the CUDA module:</b>
 ```
 [user@comet-ln2 CUDA]$ module list
@@ -1256,7 +1256,7 @@ gpu enumeration code here
     * [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output )
 
 
-[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs)
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
 <hr>
 
