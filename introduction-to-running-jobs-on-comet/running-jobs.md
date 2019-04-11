@@ -59,8 +59,9 @@ Requirements:
         * [Hybrid (MPI + OpenMP): Batch Script Output](#hybrid-mpi-omp-output)
 
 * [Compiling and Running GPU/CUDA Jobsa](#comp-and-run-cuda-jobs)
-    * [Hands-on Examples: CPU Enumeration ](#gpu-enum)
-    * [Hands-on Examples: CUDA Mat-Mult](#mat-mul-gpu)
+    * [Hello World (MPI) ](#hello-world-gpu)
+    * [GPU Enumeration ](#gpu-enum)
+    * [CUDA Mat-Mult](#mat-mul-gpu)
         * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
         * [Matrix Mult. (GPU): Batch Script submission](#mat-mul-gpu-batch-submit)
         * [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output )
@@ -1205,20 +1206,50 @@ Hello from thread 3 out of 6 from process 5 out of 8 on comet-01-04.sdsc.edu
 
 [Back to Top](#top)
 <hr>
+
 ## <a name="comp-and-run-cuda-jobs"></a>Compiling and Running GPU/CUDA Jobs
-compileing and running jobs
+Note: Comet provides both NVIDIA K80 and P100 GPU-based resources. These GPU nodes 
+are allocated as separate resources. Make sure you have enough allocations and that
+you are using the right account.
 
-###<a name=""></a>TITLE
-     [Hands-on Examples: CPU Enumeration ](#gpu-enum)
-     [Hands-on Examples: CUDA Mat-Mult](#mat-mul-gpu)
+* Comet GPU Hardware:
+<a name="gpu-hardware"></a><img src="images/comet-gpu-hardware.png" alt="Comet GPU Hardware" width="50     0px" />
+
+* Load the CUDA module:
+```
+[user@comet-ln2 CUDA]$ module list
+Currently Loaded Modulefiles:
+  1) intel/2013_sp1.2.144   2) mvapich2_ib/2.1        3) gnutools/2.69
+[user@comet-ln2 CUDA]$
+[user@comet-ln2 CUDA]$ module load cuda
+[user@comet-ln2 CUDA]$ module list
+Currently Loaded Modulefiles:
+  1) intel/2013_sp1.2.144   2) mvapich2_ib/2.1        3) gnutools/2.69          4) cuda/7.0
+[user@comet-ln2 CUDA]$
+```
+
+[Back to Top](#top)
+<hr>
+
+###<a name="gpu-hello-world"></a>GPU Hello World
+gpu hello world code here
+[Back to Top](#top)
+<hr>
+
+###<a name="gpu-enum"></a>GPU Enumeration 
+gpu enumeration code here
 
 
-## <a name="mat-mul-gpu"></a>Compiling CUDA Example (GPU)
-* Comet GPU Nodes
-    * 2 NVIDIA K-80 Cards (4 GPUs total) per node.
-    * Takes longer to run CUDA jobs.
-    
-* Change to the CUDA example directory:
+## <a name="mat-mul-gpu"></a>CUDA Mat-Mult
+mat mat mul here???    
+[Back to Top](#top)
+<hr>
+
+[Back to Top](#top)
+<hr>
+
+###<a name="mat-mul-gpu"></a>CUDA Mat-Mult](
+* Change to the CUDA Matrix-Multiplication example directory:
 ```
 [user@comet-ln2/comet-examples/PHYS244]$ cd /home/user/comet-examples/PHYS244/CUDA
 [user@comet-ln2 CUDA]$ ls -al
@@ -1237,22 +1268,18 @@ drwxr-xr-x 16 user user300     16 Aug  5 19:02 ..
 ```
 
 
+### <a name="mat-mul-gpu-compile"></a>Compiling CUDA Example (GPU)
+
 [Back to Top](#top)
 <hr>
+###<a name="hello-world-gpu"></a>Hello World (MPI) 
 
-### <a name="mat-mul-gpu-compile"></a>Compiling CUDA Example (GPU)
-* Load the CUDA module:
-```
-[user@comet-ln2 CUDA]$ module list
-Currently Loaded Modulefiles:
-  1) intel/2013_sp1.2.144   2) mvapich2_ib/2.1        3) gnutools/2.69
-[user@comet-ln2 CUDA]$
-[user@comet-ln2 CUDA]$ module load cuda
-[user@comet-ln2 CUDA]$ module list
-Currently Loaded Modulefiles:
-  1) intel/2013_sp1.2.144   2) mvapich2_ib/2.1        3) gnutools/2.69          4) cuda/7.0
-[user@comet-ln2 CUDA]$
-```
+      * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
+      * [Matrix Mult. (GPU): Batch Script submission](#mat-mul-gpu-batch-submit)
+      * [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output )
+ 
+
+
 
 * Compile the code:
 ```
