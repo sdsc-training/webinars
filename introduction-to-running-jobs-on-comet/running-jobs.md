@@ -1332,8 +1332,14 @@ echo "calling simple hello"
 [user@comet-ln2:~/cuda/simple_hello]
 ```
 
-<b>Submit the job To run the job, type the batch script submission command:</b>
+<b>Submit the job<b>
+To run the job, type the batch script submission command:
+```
+[user@comet-ln2:~/cuda/simple_hello] sbatch simple_hello.sb 
+Submitted batch job 22532827
+[user@comet-ln2:~/cuda/simple_hello]
 
+```
 
 <b>Monitor the job Monitor the job until it is finished</b>
 ```
