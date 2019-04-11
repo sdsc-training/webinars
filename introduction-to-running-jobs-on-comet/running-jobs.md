@@ -1298,14 +1298,13 @@ drwxr-xr-x 16 user user300     16 Aug  5 19:02 ..
 
 <hr>
 ### <a name="mat-mul-gpu-batch-submit"></a>Matrix Mult. (GPU): Batch Script Submission
- [Matrix Mult. (GPU): Batch Script submission](#mat-mul-gpu-batch-submit)
 
 <b>Contents of the slurm script:</b>
 ```
 [user@comet-ln2 CUDA]$ cat cuda.sb
 #!/bin/bash
-#SBATCH --job-name="CUDA"
-#SBATCH --output="CUDA.%j.%N.out"
+#SBATCH --job-name="matmul"
+#SBATCH --output="matmul.%j.%N.out"
 #SBATCH --partition=gpu-shared
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=6
@@ -1327,7 +1326,7 @@ Submitted batch job 18347288
 ```
 [user@comet-ln2 CUDA]$squeue -u user 
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-          18347288 gpu-share     CUDA  user PD       0:00      1 (None)
+          18347288 gpu-share     matmul  user PD       0:00      1 (None)
 [user@comet-ln2 CUDA]$
 ```
 
@@ -1336,7 +1335,7 @@ Submitted batch job 18347288
 ### <a name="mat-mul-gpu-batch-output"></a>Matrix Mult. (GPU): Batch Job Output
 
 ```
-[user@comet-ln2 CUDA]$ cat CUDA.18347288.comet-33-01.out
+[user@comet-ln2 CUDA]$ cat matmul.18347288.comet-33-01.out
 [Matrix Multiply Using CUDA] - Starting...
 [Matrix Multiply Using CUDA] - Welcome SI18 Attendees...
 
@@ -1352,7 +1351,7 @@ NOTE: The CUDA Samples are not meant for performance measurements. Results may v
 
 ```
 
-[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
+[Back to GPU/CUDA Jobs]<br>
 [Back to Top](#top)
 <hr>
 
