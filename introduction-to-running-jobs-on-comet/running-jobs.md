@@ -1253,26 +1253,28 @@ Sections:
 <hr>
 
 ### <a name="enum-gpu-gpu"></a>GPU Enumeration: Batch Script Submission
-<b>Contents of the Slurm script </b>
 GPU nodes can be accessed via either the "gpu" or the "gpu-shared" partitions:
 ```
-#SBATCH -p gpu            or
+#SBATCH -p gpu           
+```
+or
+```
 #SBATCH -p gpu-shared 
 ```
 
-In addition to the partition name(required), the type of gpu(optional) and the individual GPUs are scheduled as a resource.
+In addition to the partition namei (required), the type of gpui (optional) and the individual GPUs are scheduled as a resource.
 ```
-               #SBATCH --gres=gpu[:type]:n 
+#SBATCH --gres=gpu[:type]:n 
 ```
 
-GPUs will be allocated on a first available, first schedule basis, unless specified with the [type] option, where type can be k80 or p100 (type is case sensitive)
+GPUs will be allocated on a first available, first schedule basis, unless specified with the [type] option, where type can be <b>`k80`</b> or <b>`p100`</b> Note: type is case sensitive.
 ```
 #SBATCH --gres=gpu:4     #first available gpu node 
 #SBATCH --gres=gpu:k80:4 #only k80 nodes 
 #SBATCH --gres=gpu:p100:4 #only p100 nodes
 ```
 
-SLURM batch script contents:
+<b>Contents of the Slurm script </b>
 
 ```[comet-ln2: ~/cuda/gpu_enum] cat gpu_enum.sb 
 #!/bin/bash
