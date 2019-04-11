@@ -29,6 +29,8 @@ Requirements:
     * [Common module commands](#module-commands)
     * [Load and Check Modules and Environment](#load-and-check-module-env)
     * [Using Scripts to Load Module Environments](#module-load-scripts)
+    * [Module Error: command not found](#module-error)
+### <a name="module-error"></a>Module Error: command not found 
 
 * [Compiling & Linking](#compilers)
     * [Supported Compiler Types](#compilers-supported)
@@ -338,7 +340,6 @@ PATH=/opt/gnu/gcc/bin:/opt/gnu/bin:/opt/mvapich2/intel/ib/bin:/opt/intel/compose
 <hr>
 
 ### <a name="module-load-scripts"></a>Using Scripts to Load Module Environments
- [Using Scripts to Load Module Environments](#module-load-scripts)
 
 Use scripts to load your module environment. This will guarantee that the current working environment is what you want, and that you are not inheriting unwanted modules/applications. In order for the commands run inside a script (child shell) to change the parent shell, you must use the <b>`source`</b> command:
 
@@ -388,7 +389,7 @@ Currently Loaded Modulefiles:
 
 [Back to Top](#top)
 <hr>
-<b>Module Error: command not found </b>
+### <a name="module-error"></a>Module Error: command not found 
 
 Sometimes this error is encountered when switching from one shell to another or attempting to run the module command from within a shell script or batch job. The module command may not be inherited between the shells.  To keep this from happening, execute the following command:
 ```
