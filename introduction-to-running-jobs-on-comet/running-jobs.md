@@ -30,7 +30,6 @@ Requirements:
     * [Load and Check Modules and Environment](#load-and-check-module-env)
     * [Using Scripts to Load Module Environments](#module-load-scripts)
     * [Module Error: command not found](#module-error)
-### <a name="module-error"></a>Module Error: command not found 
 
 * [Compiling & Linking](#compilers)
     * [Supported Compiler Types](#compilers-supported)
