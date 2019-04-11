@@ -58,7 +58,7 @@ Requirements:
         * [Hybrid (MPI + OpenMP): Batch Script Submission](#hybrid-mpi-omp-batch-submit)
         * [Hybrid (MPI + OpenMP): Batch Script Output](#hybrid-mpi-omp-output)
 
-* [Compiling and Running GPU/CUDA Jobsa](#comp-and-run-cuda-jobs)
+* [Compiling and Running GPU/CUDA Jobs](#comp-and-run-cuda-jobs)
     * [Hello World (MPI) ](#hello-world-gpu)
     * [GPU Enumeration ](#gpu-enum)
     * [CUDA Mat-Mult](#mat-mul-gpu)
@@ -1208,6 +1208,7 @@ Hello from thread 3 out of 6 from process 5 out of 8 on comet-01-04.sdsc.edu
 <hr>
 
 ## <a name="comp-and-run-cuda-jobs"></a>Compiling and Running GPU/CUDA Jobs
+
 Note: Comet provides both NVIDIA K80 and P100 GPU-based resources. These GPU nodes 
 are allocated as separate resources. Make sure you have enough allocations and that
 you are using the right account.
@@ -1218,21 +1219,30 @@ you are using the right account.
 * Load the CUDA module:
 ```
 [user@comet-ln2 CUDA]$ module list
-Currently Loaded Modulefiles:
-  1) intel/2013_sp1.2.144   2) mvapich2_ib/2.1        3) gnutools/2.69
-[user@comet-ln2 CUDA]$
+[user@comet-ln2 CUDA]$ module purge
+[user@comet-ln2 CUDA]$ module load gnutools
 [user@comet-ln2 CUDA]$ module load cuda
 [user@comet-ln2 CUDA]$ module list
 Currently Loaded Modulefiles:
-  1) intel/2013_sp1.2.144   2) mvapich2_ib/2.1        3) gnutools/2.69          4) cuda/7.0
-[user@comet-ln2 CUDA]$
+  1) gnutools/2.69   2) cuda/7.0
+[user@comet-ln2 CUDA]$which nvcc
+/usr/local/cuda-7.0/bin/nvcc
 ```
 
 [Back to Top](#top)
 <hr>
 
+  62     * [Hello World (MPI) ](#hello-world-gpu)
+  63     * [GPU Enumeration ](#gpu-enum)
+  64     * [CUDA Mat-Mult](#mat-mul-gpu)
+  65         * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
+  66         * [Matrix Mult. (GPU): Batch Script submission](#mat-mul-gpu-batch-submit)
+  67         * [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output )
+  68 
+
 ###<a name="gpu-hello-world"></a>GPU Hello World
 gpu hello world code here
+
 [Back to Top](#top)
 <hr>
 
@@ -1240,13 +1250,24 @@ gpu hello world code here
 gpu enumeration code here
 
 
-## <a name="mat-mul-gpu"></a>CUDA Mat-Mult
+### <a name="mat-mul-gpu"></a>CUDA Mat-Mult
 mat mat mul here???    
 [Back to Top](#top)
 <hr>
 
-[Back to Top](#top)
 <hr>
+<b>=============================================================</b>
+<b>=============================================================</b>
+<b>=============================================================</b>
+<b>=============================================================</b>
+<b>THE MATERIAL BELOW HAS NOT BEEN MIGRATED</b>
+<b>=============================================================</b>
+<b>=============================================================</b>
+<b>=============================================================</b>
+<b>=============================================================</b>
+<hr>
+[Back to Top](#top)
+[Back to Top](#top)
 
 ###<a name="mat-mul-gpu"></a>CUDA Mat-Mult](
 * Change to the CUDA Matrix-Multiplication example directory:
@@ -1272,7 +1293,6 @@ drwxr-xr-x 16 user user300     16 Aug  5 19:02 ..
 
 [Back to Top](#top)
 <hr>
-###<a name="hello-world-gpu"></a>Hello World (MPI) 
 
       * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
       * [Matrix Mult. (GPU): Batch Script submission](#mat-mul-gpu-batch-submit)
