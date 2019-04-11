@@ -1332,7 +1332,8 @@ echo "calling simple hello"
 [user@comet-ln2:~/cuda/simple_hello]
 ```
 
-<b>Submit the job<b>
+<b>Submit the job</b> <br>
+
 To run the job, type the batch script submission command:
 ```
 [user@comet-ln2:~/cuda/simple_hello] sbatch simple_hello.sb 
@@ -1341,7 +1342,7 @@ Submitted batch job 22532827
 
 ```
 
-<b>Monitor the job Monitor the job until it is finished</b>
+<b>Monitor the job until it is finished</b>
 ```
 [user@comet-ln2:~/cuda/simple_hello] squeue -u user
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
