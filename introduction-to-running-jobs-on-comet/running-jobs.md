@@ -276,6 +276,10 @@ atlas/3.10.2(default)     lapack/3.6.0(default)     scalapack/2.0.2(default)
 boost/1.55.0(default)     mxml/2.9(default)         slepc/3.6.2(default)
 . . .
 ```
+
+[Back to Top](#top)
+<hr>
+
 ### <a name="load-and-check-module-env"></a>Load and Check Modules and Environment
 
 * Load modules:
@@ -303,9 +307,6 @@ prepend-path LD_LIBRARY_PATH /opt/fftw/3.3.4/intel/mvapich2_ib/lib 
 prepend-path LIBPATH /opt/fftw/3.3.4/intel/mvapich2_ib/lib 
 -------------------------------------------------------------------
 ```
-
-[Back to Top](#top)
-<hr>
 
 Once you have loaded the modules, you can check the system variables that are available for you to use.
 * To see all variable, run the <b>`env`</b> command. Typically, you will see more than 60 lines containing information such as your login name, shell, your home directory:
