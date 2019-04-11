@@ -1281,17 +1281,18 @@ Check your environment and use the CUDA <b>`nvcc`</b> command:
 
 ```
 
-### <a name="hello-world-gpu-batch-submit"></a>GPU Hello World: Batch Script Submit
+#### <a name="hello-world-gpu-batch-submit"></a>GPU Hello World: Batch Script Submit
 batch script submission info here
 
 <hr>
 
-### <a name="hello-world-gpu-batch-output"></a>GPU Hello World: Batch Job Output
+#### <a name="hello-world-gpu-batch-output"></a>GPU Hello World: Batch Job Output
 batch job output here
 
 <hr>
 
 ### <a name="enum-gpu"></a>GPU/CUDA Example: Enumeration 
+
 Sections:
 * [GPU Enumeration: Compiling](#enum-gpu-compile)
 * [GPU Enumeration: Batch Script Submission](#enum-gpu-batch-submit)
@@ -1299,7 +1300,8 @@ Sections:
 
 <hr>
 
-### <a name="enum-gpu"></a>GPU Enumeration: Compiling
+#### <a name="enum-gpu"></a>GPU Enumeration: Compiling
+
 <b>GPU Enumeration Code:</b>
 This code accesses the cudaDeviceProp object and returns information about the devices on the node. The list below is only some of the information that you can look for. The property values can be used to dynamically allocate or distribute your compute threads accross the GPU hardware in response to the GPU type. 
 ```
@@ -1350,7 +1352,7 @@ int main( void ) {
 }
 ```
 
-Check your environment and use the CUDA <b>`nvcc`</b> command:
+To compile: check your environment and use the CUDA <b>`nvcc`</b> command:
 ```
 [comet-ln2:~/cuda/gpu_enum] module purge
 [comet-ln2:~/cuda/gpu_enum] which nvcc
@@ -1366,6 +1368,7 @@ Check your environment and use the CUDA <b>`nvcc`</b> command:
 <hr>
 
 ### <a name="enum-gpu"></a>GPU Enumeration: Batch Script Submission
+
 GPU nodes can be accessed via either the "gpu" or the "gpu-shared" partitions:
 ```
 #SBATCH -p gpu           
