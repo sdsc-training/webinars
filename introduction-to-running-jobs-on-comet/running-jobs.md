@@ -59,8 +59,8 @@ Requirements:
         * [Hybrid (MPI + OpenMP): Batch Script Output](#hybrid-mpi-omp-output)
 
 * [Compiling and Running GPU/CUDA Jobs](#comp-and-run-cuda-jobs)
-    * [Hello World (MPI) ](#hello-world-gpu)
-    * [GPU Enumeration ](#gpu-enum)
+    * [Hello World (GPU) ](#hello-world-gpu)
+    * [GPU Enumeration ](#enum-gpu)
     * [CUDA Mat-Mult](#mat-mul-gpu)
         * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
         * [Matrix Mult. (GPU): Batch Script submission](#mat-mul-gpu-batch-submit)
@@ -1213,11 +1213,10 @@ Note: Comet provides both NVIDIA K80 and P100 GPU-based resources. These GPU nod
 are allocated as separate resources. Make sure you have enough allocations and that
 you are using the right account.
 
-* Comet GPU Hardware:
-
+<b> Comet GPU Hardware: </b>
 <a name="gpu-hardware"></a><img src="images/comet-gpu-hardware.png" alt="Comet GPU Hardware" width="500px" />
 
-* Load the CUDA module:
+<b>Load the CUDA module:</b>
 ```
 [user@comet-ln2 CUDA]$ module list
 [user@comet-ln2 CUDA]$ module purge
@@ -1230,31 +1229,37 @@ Currently Loaded Modulefiles:
 /usr/local/cuda-7.0/bin/nvcc
 ```
 
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs)
 [Back to Top](#top)
 <hr>
 
-  62     * [Hello World (MPI) ](#hello-world-gpu)
-  63     * [GPU Enumeration ](#gpu-enum)
-  64     * [CUDA Mat-Mult](#mat-mul-gpu)
-  65         * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
-  66         * [Matrix Mult. (GPU): Batch Script submission](#mat-mul-gpu-batch-submit)
-  67         * [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output )
-  68 
-
-###<a name="gpu-hello-world"></a>GPU Hello World
+###<a name="hello-world-gpu"></a>GPU Hello World
+* [Hello World (GPU) ](#hello-world-gpu)
 gpu hello world code here
 
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs)
 [Back to Top](#top)
 <hr>
 
-###<a name="gpu-enum"></a>GPU Enumeration 
+###<a name="enum-gpu"></a>GPU Enumeration 
+* [GPU Enumeration ](#enum-gpu)
 gpu enumeration code here
 
-
-### <a name="mat-mul-gpu"></a>CUDA Mat-Mult
-mat mat mul here???    
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs)
 [Back to Top](#top)
 <hr>
+
+###<a name="gpu-hello-world"></a>GPU Hello World
+* [CUDA Mat-Mult](#mat-mul-gpu)
+    * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
+    * [Matrix Mult. (GPU): Batch Script submission](#mat-mul-gpu-batch-submit)
+    * [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output )
+
+
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs)
+[Back to Top](#top)
+<hr>
+
 
 <hr>
 <b>=============================================================</b>
