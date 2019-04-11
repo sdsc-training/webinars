@@ -1243,6 +1243,21 @@ Currently Loaded Modulefiles:
 * [GPU Hello World: Batch Script Submission](#hello-world-gpu-batch-submit)
 * [GPU Hello World: Batch Job Output](#hello-world-gpu-batch-output)
 
+### <a name="hello-world-gpu-compile"></a>GPU Hello World: Compiling
+Check your environment and use the CUDA <b>`nvcc`</b> command:
+```
+[comet-ln2:~/cuda/gpu_enum] module purge
+[comet-ln2:~/cuda/gpu_enum] which nvcc
+/usr/bin/which: no nvcc in (/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/opt/ibutils/bin:/usr/java/latest/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/home/user/bin)
+[comet-ln2:~/cuda/gpu_enum] module load cuda
+[comet-ln2:~/cuda/gpu_enum] which nvcc
+/usr/local/cuda-7.0/bin/nvcc
+[comet-ln2:~/cuda/simple_hello] nvcc -o simple_hello -I.  gpu_enum.cu
+[comet-ln2:~/cuda/simple_hello] ll simple_hello 
+-rwxr-xr-x 1 mthomas use300 517437 Apr 10 19:35 simple_hello
+-rw-r--r-- 1 mthomas use300    304 Apr 10 19:35 simple_hello.cu
+[comet-ln2:~/cuda/gpu_enum] 
+```
 Simple hello runs a cuda command to get the device count
 on the node that job is assigned to:
 ```
@@ -1264,21 +1279,14 @@ int main( void )
 [mthomas@comet-ln2:~/cuda/simple_hello] 
 ```
 
-### <a name="enum-gpu"></a>GPU Hello World: Compiling
-Check your environment and use the CUDA <b>`nvcc`</b> command:
-```
-[comet-ln2:~/cuda/gpu_enum] module purge
-[comet-ln2:~/cuda/gpu_enum] which nvcc
-/usr/bin/which: no nvcc in (/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/opt/ibutils/bin:/usr/java/latest/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/home/user/bin)
-[comet-ln2:~/cuda/gpu_enum] module load cuda
-[comet-ln2:~/cuda/gpu_enum] which nvcc
-/usr/local/cuda-7.0/bin/nvcc
-[comet-ln2:~/cuda/simple_hello] nvcc -o simple_hello -I.  gpu_enum.cu
-[comet-ln2:~/cuda/simple_hello] ll simple_hello 
--rwxr-xr-x 1 mthomas use300 517437 Apr 10 19:35 simple_hello
--rw-r--r-- 1 mthomas use300    304 Apr 10 19:35 simple_hello.cu
-[comet-ln2:~/cuda/gpu_enum] 
-```
+
+### <a name="hello-world-gpu-batch-submit"></a>GPU Hello World: Batch Script Submit
+* [GPU Hello World: Batch Script Submission](#hello-world-gpu-batch-submit)
+
+<hr>
+
+### <a name="hello-world-gpu-batch-submit"></a>GPU Hello World: Batch Job Output
+* [GPU Hello World: Batch Job Output](#hello-world-gpu-batch-output)
 
 <hr>
 
