@@ -1243,7 +1243,7 @@ Currently Loaded Modulefiles:
 * [GPU Hello World: Batch Script Submission](#hello-world-gpu-batch-submit)
 * [GPU Hello World: Batch Job Output](#hello-world-gpu-batch-output)
 
-### <a name="hello-world-gpu-compile"></a>GPU Hello World: Compiling
+#### <a name="hello-world-gpu-compile"></a>GPU Hello World: Compiling
 Simple hello runs a cuda command to get the device count
 on the node that job is assigned to:
 ```
@@ -1342,7 +1342,7 @@ Submitted batch job 22532827
 
 ```
 
-<b>Monitor the job until it is finished</b>
+<b>Monitor the job until it is finished:</b>
 ```
 [user@comet-ln2:~/cuda/simple_hello] squeue -u user
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
@@ -1442,7 +1442,7 @@ To compile: check your environment and use the CUDA <b>`nvcc`</b> command:
 ```
 <hr>
 
-### <a name="enum-gpu"></a>GPU Enumeration: Batch Script Submission
+#### <a name="enum-gpu"></a>GPU Enumeration: Batch Script Submission
 <b>Contents of the Slurm script </b>
 
 ```[comet-ln2: ~/cuda/gpu_enum] cat gpu_enum.sb 
@@ -1481,7 +1481,7 @@ Submitted batch job 22527745
 
 ```
 
-### <a name="enum-gpu"></a>GPU Enumeration: Batch Job Output 
+#### <a name="enum-gpu"></a>GPU Enumeration: Batch Job Output 
 Output from script is for one device, which is what was specified in script.
 
 ```
@@ -1581,7 +1581,7 @@ Sections:
 * [Matrix Mult. (GPU): Batch Script Submission](#mat-mul-gpu-batch-submit)
 * [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output )
 
-### <a name="mat-mul-gpu"></a>CUDA Example: Matrix-Multiplication
+#### <a name="mat-mul-gpu"></a>CUDA Example: Matrix-Multiplication
 <b>Change to the CUDA Matrix-Multiplication example directory:</b>
 ```
 [user@comet-ln2/comet-examples/PHYS244]$ cd /home/user/comet-examples/PHYS244/CUDA
@@ -1601,7 +1601,7 @@ drwxr-xr-x 16 user user300     16 Aug  5 19:02 ..
 ```
 
 
-### <a name="mat-mul-gpu-compile"></a>Compiling CUDA Example (GPU)
+#### <a name="mat-mul-gpu-compile"></a>Compiling CUDA Example (GPU)
 
 <b> Compile the code:</b>
 ```
@@ -1625,7 +1625,7 @@ drwxr-xr-x 16 user user300     16 Aug  5 19:02 ..
 
 <hr>
 
-### <a name="mat-mul-gpu-batch-submit"></a>Matrix Mult. (GPU): Batch Script Submission
+#### <a name="mat-mul-gpu-batch-submit"></a>Matrix Mult. (GPU): Batch Script Submission
 
 <b>Contents of the slurm script:</b>
 ```
@@ -1663,7 +1663,7 @@ Submitted batch job 18347288
 
 <hr>
 
-### <a name="mat-mul-gpu-batch-output"></a>Matrix Mult. (GPU): Batch Job Output
+#### <a name="mat-mul-gpu-batch-output"></a>Matrix Mult. (GPU): Batch Job Output
 
 ```
 [user@comet-ln2 CUDA]$ cat matmul.18347288.comet-33-01.out
