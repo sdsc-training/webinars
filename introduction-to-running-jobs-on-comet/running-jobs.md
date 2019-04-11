@@ -330,6 +330,34 @@ PATH=/opt/gnu/gcc/bin:/opt/gnu/bin:/opt/mvapich2/intel/ib/bin:/opt/intel/compose
 [Back to Top](#top)
 <hr>
 
+<em>Using Script to load modules</em>
+
+Use scripts to load your module environment. This will guarantee that the current working environment is what you want, and that you are not inheriting unwanted modules/applications. In order for the commands run inside a script (child shell) to change the parent shell, you must use the <b>`source`</b> command:
+
+A script for loading in a GPU/CUDA evironment is shown below. The first thing it does is to purge out all modules, and then it loads in the GNU and GPU tools needed:
+```
+comet-ln3:~] cat loadgpuenv.sh 
+#!/bin/bash
+module purge
+module load gnutools
+module load cuda
+```
+
+Next, we source this scripts, and check out the module environment:
+```
+[comet-ln3:~] source ./loadgpuenv.sh
+[comet-ln3:~] module list 
+Currently Loaded Modulefiles:
+  1) gnutools/2.69   2) cuda/7.0
+[comet-ln3:~] which nvcc
+/usr/local/cuda-7.0/bin/nvcc
+[mthomas@comet-ln3:~] which mpirun
+/usr/bin/which: no mpirun in (/opt/gnu/gcc/bin:usr/local/bin……..)
+```
+
+[Back to Top](#top)
+<hr>
+
 ## <a name="compilers"></a>Compiling & Linking
 
 Comet provides the Intel, Portland Group (PGI), and GNU compilers along with multiple MPI implementations (MVAPICH2, MPICH2, OpenMPI). Most applications will achieve the best performance on Comet using the Intel compilers and MVAPICH2 and the majority of libraries installed on Comet have been built using this combination. 
