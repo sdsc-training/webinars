@@ -43,7 +43,7 @@ Requirements:
     * [Batch Jobs using SLURM](#running-jobs-slurm)
     * [Slurm Commands](#running-jobs-slurm-commands)
 
-* [Putting it All Together](#putting-it-all-together)
+* [Hands-on Examples: CPU Computing](#putting-it-all-together)
     * [Hello World (MPI)](#hello-world-mpi)
         * [Hello World (MPI): Compiling](#helloworld-mpi-compile)
         * [Hello World (MPI): Batch Script Submission](#helloworld-mpi-batch-submit)
@@ -57,7 +57,10 @@ Requirements:
         * [Hybrid (MPI + OpenMP): Compiling](#hybrid-mpi-omp-compile)
         * [Hybrid (MPI + OpenMP): Batch Script Submission](#hybrid-mpi-omp-batch-submit)
         * [Hybrid (MPI + OpenMP): Batch Script Output](#hybrid-mpi-omp-output)
-    * [Compiling CUDA Example (GPU)](#mat-mul-gpu)
+
+* [Compiling and Running GPU/CUDA Jobsa](#comp-and-run-cuda-jobs)
+    * [Hands-on Examples: CPU Enumeration ](#gpu-enum)
+    * [Hands-on Examples: CUDA Mat-Mult](#mat-mul-gpu)
         * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
         * [Matrix Mult. (GPU): Batch Script submission](#mat-mul-gpu-batch-submit)
         * [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output )
@@ -1202,6 +1205,13 @@ Hello from thread 3 out of 6 from process 5 out of 8 on comet-01-04.sdsc.edu
 
 [Back to Top](#top)
 <hr>
+## <a name="comp-and-run-cuda-jobs"></a>Compiling and Running GPU/CUDA Jobs
+compileing and running jobs
+
+###<a name=""></a>TITLE
+     [Hands-on Examples: CPU Enumeration ](#gpu-enum)
+     [Hands-on Examples: CUDA Mat-Mult](#mat-mul-gpu)
+
 
 ## <a name="mat-mul-gpu"></a>Compiling CUDA Example (GPU)
 * Comet GPU Nodes
@@ -1296,7 +1306,8 @@ Submitted batch job 18347288
 [Back to Top](#top)
 <hr>
 
-#### <a name="mat-mul-gpu-batch-output"></a>Hello World (GPU): Output
+### <a name="comp-and-run-cuda-jobs"></a>Compiling and Running GPU/CUDA Jobs
+  * [Hands-on Examples: CUDA Mat-Mult](#mat-mul-gpu)
 
 ```
 [user@comet-ln2 CUDA]$ cat CUDA.18347288.comet-33-01.out
