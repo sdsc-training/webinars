@@ -1241,7 +1241,6 @@ gpu hello world code here
 <hr>
 
 ### <a name="enum-gpu"></a>GPU/CUDA Example: Enumeration 
-* [GPU Enumeration ](#enum-gpu)
 Sections:
 * [GPU Enumeration: Compiling](#enum-gpu-compile)
 * [GPU Enumeration: Batch Script submission](#enum-gpu-batch-submit)
@@ -1255,7 +1254,23 @@ Sections:
 
 ### <a name="enum-gpu-gpu"></a>GPU Enumeration: Batch Script Submission
 <b>Contents of the Slurm script </b>
+GPU nodes can be accessed via either the "gpu" or the "gpu-shared" partitions:
+```
+#SBATCH -p gpu            or
+#SBATCH -p gpu-shared 
+```
 
+In addition to the partition name(required), the type of gpu(optional) and the individual GPUs are scheduled as a resource.
+```
+               #SBATCH --gres=gpu[:type]:n 
+```
+
+GPUs will be allocated on a first available, first schedule basis, unless specified with the [type] option, where type can be k80 or p100 (type is case sensitive)
+```
+#SBATCH --gres=gpu:4     #first available gpu node 
+#SBATCH --gres=gpu:k80:4 #only k80 nodes 
+#SBATCH --gres=gpu:p100:4 #only p100 nodes
+```
 <b>Submit the job </b>
 
 <b>Monitor the job </b>
