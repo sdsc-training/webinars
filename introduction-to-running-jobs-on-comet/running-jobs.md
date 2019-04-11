@@ -1375,7 +1375,7 @@ Sections:
 
 <hr>
 
-#### <a name="enum-gpu"></a>GPU Enumeration: Compiling
+#### <a name="enum-gpu-compile"></a>GPU Enumeration: Compiling
 
 <b>GPU Enumeration Code:</b>
 This code accesses the cudaDeviceProp object and returns information about the devices on the node. The list below is only some of the information that you can look for. The property values can be used to dynamically allocate or distribute your compute threads accross the GPU hardware in response to the GPU type. 
@@ -1442,7 +1442,7 @@ To compile: check your environment and use the CUDA <b>`nvcc`</b> command:
 ```
 <hr>
 
-#### <a name="enum-gpu"></a>GPU Enumeration: Batch Script Submission
+#### <a name="enum-gpu-batch-submit"></a>GPU Enumeration: Batch Script Submission
 <b>Contents of the Slurm script </b>
 
 ```[comet-ln2: ~/cuda/gpu_enum] cat gpu_enum.sb 
@@ -1481,7 +1481,7 @@ Submitted batch job 22527745
 
 ```
 
-#### <a name="enum-gpu"></a>GPU Enumeration: Batch Job Output 
+#### <a name="enum-gpu-batch-output"></a>GPU Enumeration: Batch Job Output 
 Output from script is for one device, which is what was specified in script.
 
 ```
