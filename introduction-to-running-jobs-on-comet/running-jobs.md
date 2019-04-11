@@ -1443,6 +1443,70 @@ NOTE: The CUDA Samples are not meant for performance measurements. Results may v
 
 ```
 
+If we change the batch script to ask for 2 devices (see line 8):
+```
+ 1 #!/bin/bash
+  2 #SBATCH --job-name="gpu_enum"
+  3 #SBATCH --output="gpu_enum.%j.%N.out"
+  4 #SBATCH --partition=gpu-shared          # define GPU partition
+  5 #SBATCH --nodes=1
+  6 #SBATCH --ntasks-per-node=6
+  7 ####SBATCH --gres=gpu:1         # define type of GPU
+  8 #SBATCH --gres=gpu:2         # first available
+  9 #SBATCH -t 00:05:00
+ 10 
+ 11 #Load the cuda module
+ 12 module load cuda
+ 13 
+ 14 #Run the job
+ 15 ./gpu_enum
+```
+
+The output looks like this:
+```
+[mthomas@comet-ln2:~/cuda/gpu_enum] cat gpu_enum.22528598.comet-33-09.out 
+ --- Obtaining General Information for CUDA devices  ---
+ --- General Information for device 0 ---
+Name: Tesla P100-PCIE-16GB
+Compute capability: 6.0
+Clock rate: 1328500
+Device copy overlap: Enabled
+Kernel execution timeout : Disabled
+ --- Memory Information for device 0 ---
+Total global mem: 17071734784
+Total constant Mem: 65536
+Max mem pitch: 2147483647
+Texture Alignment: 512
+ --- MP Information for device 0 ---
+Multiprocessor count: 56
+Shared mem per mp: 49152
+Registers per mp: 65536
+Threads in warp: 32
+Max threads per block: 1024
+Max thread dimensions: (1024, 1024, 64)
+Max grid dimensions: (2147483647, 65535, 65535)
+
+ --- General Information for device 1 ---
+Name: Tesla P100-PCIE-16GB
+Compute capability: 6.0
+Clock rate: 1328500
+Device copy overlap: Enabled
+Kernel execution timeout : Disabled
+ --- Memory Information for device 1 ---
+Total global mem: 17071734784
+Total constant Mem: 65536
+Max mem pitch: 2147483647
+Texture Alignment: 512
+ --- MP Information for device 1 ---
+Multiprocessor count: 56
+Shared mem per mp: 49152
+Registers per mp: 65536
+Threads in warp: 32
+Max threads per block: 1024
+Max thread dimensions: (1024, 1024, 64)
+Max grid dimensions: (2147483647, 65535, 65535)
+```
+
 [Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
 <hr>
